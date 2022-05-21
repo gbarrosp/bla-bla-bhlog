@@ -1,1 +1,22 @@
-<p>login works!</p>
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div class="panel" fxLayout="column" fxLayoutGap="15px">
+      <span class="title">
+          <img src="assets/images/banner.png">
+      </span>
+      <form [formGroup]="loginForm" (ngSubmit)="signIn()">
+          <div fxLayout="column" fxLayoutGap="15px">
+              <mat-form-field appearance="outline">
+                  <mat-label>Usuário</mat-label>
+                  <input matInput formControlName="username">
+              </mat-form-field>
+              <mat-form-field appearance="outline">
+                  <mat-label>Senha</mat-label>
+                  <input matInput type="password" formControlName="password">
+              </mat-form-field>
+              <button mat-raised-button type="submit" class="pink-button">ENTRAR</button>
+          </div>
+      </form>
+      <mat-divider></mat-divider>
+      <button mat-stroked-button (click)="goToSignUp()" class="pink-text">CADASTRAR</button>
+  </div>
+</div>

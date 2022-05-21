@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import 'material-icons/iconfont/material-icons.css';
+
+html {
+  background-color: #edddf3;
+  font-family: 'Roboto';
+}
+
+body {
+  margin:0
+}
+
+ng-select.no-padding {
+  padding-bottom: 0;
+}
+
+mat-form-field.no-padding .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+button {
+  height: 45px;
+}
+
+.pink-text {
+  color: #911cc0;
+}
+
+.pink-button {
+  color: #ffffff;
+  background-color: #911cc0;
+}
