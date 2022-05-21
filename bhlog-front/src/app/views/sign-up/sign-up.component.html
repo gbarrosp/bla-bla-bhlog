@@ -1,1 +1,33 @@
-<p>sign-up works!</p>
+<div class="container" fxLayoutAlign="center center">
+  <div class="panel" fxLayout="column" fxLayoutGap="15px">
+    <span class="title">
+        <img src="assets/images/banner.png">
+    </span>
+    <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+      <div fxLayout="column" fxLayoutGap="35px">
+        <div fxLayout="column" fxLayoutGap="15px">
+            <mat-form-field appearance="outline" class="no-padding">
+                <mat-label>Nome</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="no-padding">
+                <mat-label>Usuário</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="no-padding">
+                <mat-label>Senha</mat-label>
+                <input matInput type="password" formControlName="password">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="no-padding">
+                <mat-label>Repita a senha</mat-label>
+                <input matInput type="password" formControlName="passwordMatch">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+          <button mat-stroked-button (click)="navigateToLogin()" class="pink-text" fxFlex>VOLTAR</button>
+          <button mat-raised-button type="submit" class="pink-button" fxFlex>CADASTRAR</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -2,7 +2,7 @@
 @import 'material-icons/iconfont/material-icons.css';
 
 html {
-  background-color: #edddf3;
+  background-color: #921cc038;
   font-family: 'Roboto';
 }
 
@@ -22,6 +22,10 @@ button {
   height: 45px;
 }
 
+img {
+  width: 400px;
+}
+
 .pink-text {
   color: #911cc0;
 }
@@ -29,4 +33,15 @@ button {
 .pink-button {
   color: #ffffff;
   background-color: #911cc0;
+}
+
+.container {
+  height: 100vh;
+}
+
+.panel {
+  background-color: #eaf5ff;
+  border-radius: 8px;
+  padding: 24px 20px;
+  min-width: 450px;
 }
