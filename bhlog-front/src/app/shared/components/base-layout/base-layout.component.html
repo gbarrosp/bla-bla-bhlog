@@ -1,2 +1,15 @@
-<p>base-layout works!</p>
+<mat-toolbar>
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+      <img src="assets/images/banner.png">
+      <div class="header-container" fxLayout="row" fxLayoutAlign="space-between center">
+        <span class="title">Fotos</span>
+        <button mat-button class="logout-btn" (click)="logout()">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+            <span>SAIR</span>
+            <mat-icon>logout</mat-icon>
+          </div>
+        </button>
+      </div>
+  </div>
+</mat-toolbar>
 <router-outlet></router-outlet>

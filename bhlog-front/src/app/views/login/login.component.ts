@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SignUpView } from 'app/shared/utils/views.utils';
+import { HomeView, SignUpView } from 'app/shared/utils/views.utils';
 
 @Component({
   templateUrl: './login.component.html',
@@ -28,7 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   signIn(){
-    let formData = this.loginForm.getRawValue()
+    this.router.navigate([`/${HomeView.url}`])
+
+    // let formData = this.loginForm.getRawValue()
     // this.authService.login(formData.username, formData.password).subscribe(
     //   (response)=>{
     //     this.router.navigate([Views.patients.url])
