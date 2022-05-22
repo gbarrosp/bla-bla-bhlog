@@ -1,0 +1,48 @@
+<mat-toolbar>
+  <div fxFill fxLayout="row">
+    <div fxFlex="25" fxLayoutAlign="start center">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="navigateTo('/posts')">
+          <mat-icon>article</mat-icon>
+          <span>Posts</span>
+        </button>
+        <button mat-menu-item (click)="navigateTo('/fotos')">
+          <mat-icon>insert_photo</mat-icon>
+          <span>Fotos</span>
+        </button>
+        <button mat-menu-item (click)="navigateTo('/meus-albuns')">
+          <mat-icon>perm_media</mat-icon>
+          <span>Meus álbuns</span>
+        </button>
+      </mat-menu>
+    </div>
+    <div fxFlex="50" fxLayout="row" fxLayoutAlign="center center">
+      <img src="assets/images/banner.png" (click)="navigateTo('/home')">
+    </div>
+    <div fxFlex="25" fxLayout="row" fxLayoutAlign="end center">
+      <button mat-button class="logout-btn" (click)="logout()">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+          <span>SAIR</span>
+          <mat-icon>logout</mat-icon>
+        </div>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+<!-- <mat-toolbar>
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+      <img src="assets/images/banner.png" (click)="navigateHome()">
+      <div class="header-container" fxLayout="row" fxLayoutAlign="space-between center">
+        <span class="title">Fotos</span>
+        <button mat-button class="logout-btn" (click)="logout()">
+          <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="15px">
+            <span>SAIR</span>
+            <mat-icon>logout</mat-icon>
+          </div>
+        </button>
+      </div>
+  </div>
+</mat-toolbar> -->

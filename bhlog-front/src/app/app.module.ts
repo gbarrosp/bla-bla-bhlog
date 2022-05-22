@@ -8,12 +8,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseLayoutComponent } from './shared/components/base-layout/base-layout.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 import { PhotoComponent } from './shared/components/photo/photo.component';
 import { PhotosGridComponent } from './shared/components/photos-grid/photos-grid.component';
 import { PostComponent } from './shared/components/post/post.component';
@@ -40,7 +42,8 @@ import { SignUpComponent } from './views/sign-up/sign-up.component';
     PhotoComponent,
     PhotosGridComponent,
     PhotoAlbumsComponent,
-    PhotoAlbumComponent
+    PhotoAlbumComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { SignUpComponent } from './views/sign-up/sign-up.component';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatGridListModule
+    MatGridListModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
