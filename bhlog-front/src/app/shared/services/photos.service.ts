@@ -16,7 +16,8 @@ export class PhotosService {
           id: '1',
           user: {
             id: '1',
-            name: 'laoaooa'
+            name: 'laoaooa',
+            username: 'xi pi pi pi'
           },
           title: 'uno ambul',
           description: 'belo album'
@@ -24,7 +25,7 @@ export class PhotosService {
         title: 'uno ambul',
         description: 'belo album',
         content: 'kkakka',
-        created_at: '20020'
+        created_at: '2022-05-22T00:55:58.361Z',
       },
       {
         id: '1',
@@ -32,7 +33,8 @@ export class PhotosService {
           id: '1',
           user: {
             id: '1',
-            name: 'laoaooa'
+            name: 'laoaooa',
+            username: 'xi pi pi pi'
           },
           title: 'uno ambul',
           description: 'belo album'
@@ -40,7 +42,7 @@ export class PhotosService {
         title: 'uno ambul',
         description: 'belo album',
         content: 'kkakka',
-        created_at: '20020'
+        created_at: '2022-05-22T00:55:58.361Z',
       },
       {
         id: '1',
@@ -48,7 +50,8 @@ export class PhotosService {
           id: '1',
           user: {
             id: '1',
-            name: 'laoaooa'
+            name: 'laoaooa',
+            username: 'xi pi pi pi'
           },
           title: 'uno ambul',
           description: 'belo album'
@@ -56,39 +59,7 @@ export class PhotosService {
         title: 'uno ambul',
         description: 'belo album',
         content: 'kkakka',
-        created_at: '20020'
-      },
-      {
-        id: '1',
-        photo_album: {
-          id: '1',
-          user: {
-            id: '1',
-            name: 'laoaooa'
-          },
-          title: 'uno ambul',
-          description: 'belo album'
-        },
-        title: 'uno ambul',
-        description: 'belo album',
-        content: 'kkakka',
-        created_at: '20020'
-      },
-      {
-        id: '1',
-        photo_album: {
-          id: '1',
-          user: {
-            id: '1',
-            name: 'laoaooa'
-          },
-          title: 'uno ambul',
-          description: 'belo album'
-        },
-        title: 'uno ambul',
-        description: 'belo album',
-        content: 'kkakka',
-        created_at: '20020'
+        created_at: '2022-05-22T00:55:58.361Z',
       },
     ]
   }

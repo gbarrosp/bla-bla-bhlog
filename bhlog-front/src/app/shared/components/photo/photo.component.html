@@ -1,8 +1,8 @@
 <mat-card class="photo">
   <mat-card-title>{{photo.title}}</mat-card-title>
-  <div fxLayout="row">
+  <div fxLayout="row" fxLayoutAlign="space-between">
     <span>{{photo.photo_album.title}}</span>
-    <span>{{photo.created_at}}</span>
+    <span>{{photo.created_at | date:'dd/MM/YYYY'}}</span>
   </div>
   <mat-card-content>
     {{photo.content}}

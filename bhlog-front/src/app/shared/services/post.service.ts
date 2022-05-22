@@ -15,7 +15,8 @@ export class PostService {
         title: 'Melhor post',
         user: {
           id: '1',
-          name: 'Gustavo'
+          name: 'Gustavo',
+          username: 'gbarrosp'
         },
         content: 'Some content',
         created_at: '2022-05-22T00:55:58.361Z',
@@ -26,7 +27,8 @@ export class PostService {
         title: 'Melhor post',
         user: {
           id: '1',
-          name: 'Gustavo'
+          name: 'Gustavo',
+          username: 'gbarrosp'
         },
         content: 'Some content',
         created_at: '2022-05-22T00:55:58.361Z',
@@ -37,7 +39,8 @@ export class PostService {
         title: 'Melhor post',
         user: {
           id: '1',
-          name: 'Gustavo'
+          name: 'Gustavo',
+          username: 'gbarrosp'
         },
         content: 'Some content',
         created_at: '2022-05-22T00:55:58.361Z',
