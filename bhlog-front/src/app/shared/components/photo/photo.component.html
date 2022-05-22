@@ -1,0 +1,10 @@
+<mat-card class="photo">
+  <mat-card-title>{{photo.title}}</mat-card-title>
+  <div fxLayout="row">
+    <span>{{photo.photo_album.title}}</span>
+    <span>{{photo.created_at}}</span>
+  </div>
+  <mat-card-content>
+    {{photo.content}}
+  </mat-card-content>
+</mat-card>

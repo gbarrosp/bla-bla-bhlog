@@ -13,13 +13,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseLayoutComponent } from './shared/components/base-layout/base-layout.component';
-import { BlogItemComponent } from './shared/components/blog-item/blog-item.component';
+import { PostComponent } from './shared/components/post/post.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
-import { PostComponent } from './shared/components/post/post.component';
+import { PhotoComponent } from './shared/components/photo/photo.component';
 
 
 
@@ -32,8 +32,8 @@ import { PostComponent } from './shared/components/post/post.component';
     PostsComponent,
     PhotosComponent,
     BaseLayoutComponent,
-    BlogItemComponent,
-    PostComponent
+    PostComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule,

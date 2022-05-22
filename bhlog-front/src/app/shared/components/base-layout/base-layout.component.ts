@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginView } from 'app/shared/utils/views.utils';
+import { HomeView, LoginView } from 'app/shared/utils/views.utils';
 
 @Component({
   selector: 'app-base-layout',
@@ -14,6 +14,10 @@ export class BaseLayoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  navigateHome(){
+    this.router.navigate([`/${HomeView.url}`])
   }
 
   logout(){
