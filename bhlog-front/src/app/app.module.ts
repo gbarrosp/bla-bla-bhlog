@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -13,16 +14,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BaseLayoutComponent } from './shared/components/base-layout/base-layout.component';
+import { PhotoComponent } from './shared/components/photo/photo.component';
+import { PhotosGridComponent } from './shared/components/photos-grid/photos-grid.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
+import { PhotoAlbumComponent } from './views/photo-album/photo-album.component';
+import { PhotoAlbumsComponent } from './views/photo-albums/photo-albums.component';
 import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
-import { PhotoComponent } from './shared/components/photo/photo.component';
-import { PhotosGridComponent } from './shared/components/photos-grid/photos-grid.component';
-import { PhotoAlbumsComponent } from './views/photo-albums/photo-albums.component';
-import { PhotoAlbumComponent } from './views/photo-album/photo-album.component';
 
 
 
@@ -54,7 +55,8 @@ import { PhotoAlbumComponent } from './views/photo-album/photo-album.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
