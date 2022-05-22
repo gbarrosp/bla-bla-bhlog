@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BaseLayoutComponent } from './shared/components/base-layout/base-layout.component';
 import { AuthGuard } from './shared/services/auth.guard';
-import { HomeView, LoginView, PhotosView, PostsView, SignUpView } from './shared/utils/views.utils';
+import { HomeView, LoginView, PhotoAlbumsView, PhotoAlbumView, PhotosView, PostsView, SignUpView } from './shared/utils/views.utils';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
+import { PhotoAlbumComponent } from './views/photo-album/photo-album.component';
+import { PhotoAlbumsComponent } from './views/photo-albums/photo-albums.component';
 import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
@@ -20,6 +22,8 @@ const routes: Routes = [
       { path: HomeView.url, component: HomeComponent },
       { path: PostsView.url, component: PostsComponent },
       { path: PhotosView.url, component: PhotosComponent },
+      { path: PhotoAlbumView.urlData, component: PhotoAlbumComponent },
+      { path: PhotoAlbumsView.url, component: PhotoAlbumsComponent },
     ]
   }
 ];

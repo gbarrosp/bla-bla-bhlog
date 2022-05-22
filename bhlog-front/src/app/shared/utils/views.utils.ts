@@ -18,3 +18,12 @@ export const PhotosView = {
   url: 'fotos'
 }
 
+export const PhotoAlbumView = {
+  url: 'album',
+  urlData: 'album/:id',
+}
+
+export const PhotoAlbumsView = {
+  url: 'meus-albuns'
+}
+
