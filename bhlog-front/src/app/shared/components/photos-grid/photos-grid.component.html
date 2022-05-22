@@ -1,0 +1,13 @@
+<div fxLayout="column" fxLayoutAlign="start center" fxLayout="column">
+  <div *ngFor="let photo of photos; let i = index" fxFill>
+    <div *ngIf="i % 3 == 0" fxLayout="row" fxLayoutAlign="start" fxLayoutGap="50px">
+      <app-photo [photo]="photo"></app-photo>
+      <div *ngIf="i + 1 < photos.length">
+        <app-photo [photo]="photos[i + 1]"></app-photo>
+      </div>
+      <div *ngIf="i + 2 < photos.length">
+        <app-photo [photo]="photos[i + 2]"></app-photo>
+      </div>
+    </div>
+  </div>
+</div>

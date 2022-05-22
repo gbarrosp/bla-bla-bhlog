@@ -20,6 +20,7 @@ import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
 import { PhotoComponent } from './shared/components/photo/photo.component';
+import { PhotosGridComponent } from './shared/components/photos-grid/photos-grid.component';
 
 
 
@@ -33,7 +34,8 @@ import { PhotoComponent } from './shared/components/photo/photo.component';
     PhotosComponent,
     BaseLayoutComponent,
     PostComponent,
-    PhotoComponent
+    PhotoComponent,
+    PhotosGridComponent
   ],
   imports: [
     BrowserModule,
