@@ -6,4 +6,5 @@ export interface Post {
   title: string;
   content: any;
   created_at: string;
+  commentsCounter: number;
 }

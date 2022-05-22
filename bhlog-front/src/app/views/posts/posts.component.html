@@ -1,1 +1,5 @@
-<p>posts works!</p>
+<div fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center center">
+  <div *ngFor="let post of posts">
+    <app-post class="post" [post]="post"></app-post>
+  </div>
+</div>
