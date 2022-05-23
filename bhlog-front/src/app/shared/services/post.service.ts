@@ -60,4 +60,8 @@ export class PostService {
   newPost(post: Post){
     console.log(post)
   }
+
+  deletePost(){
+
+  }
 }
