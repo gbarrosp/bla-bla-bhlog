@@ -9,8 +9,10 @@ import javax.validation.Valid;
 
 import com.bhlog.bhlogback.dtos.PhotoAlbumDto;
 import com.bhlog.bhlogback.entities.PhotoAlbumEntity;
+import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.services.PhotoAlbumService;
+import com.bhlog.bhlogback.services.UserService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +32,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class PhotoAlbumController {
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
     private PhotoAlbumService photoAlbumService;
 
 	@Autowired
 	private ModelMapper modelMapper;
 
-    @GetMapping("/user/{id}")
-	public ResponseEntity<Response<List<PhotoAlbumDto>>> getAlbumsByUserId(@PathVariable("id") String userId) {
+    @GetMapping("/{username}")
+	public ResponseEntity<Response<List<PhotoAlbumDto>>> getAlbumsByUserId(@PathVariable("username") String username) {
 		Response<List<PhotoAlbumDto>> response = new Response<List<PhotoAlbumDto>>();
 
 		try {
-			UUID id = UUID.fromString(userId);
-			Optional<List<PhotoAlbumEntity>> albums = photoAlbumService.getAlbumsByUserId(id);
+			Optional<UserEntity> user = userService.findByUsername(username);
+			Optional<List<PhotoAlbumEntity>> albums = photoAlbumService.getAlbumsByUserId(user.get().getId());
 			List<PhotoAlbumDto> albumsDtos = albums.get().stream().map(album -> modelMapper.map(album, PhotoAlbumDto.class)).collect(Collectors.toList());
 
 			response.setData(albumsDtos);
@@ -57,7 +62,9 @@ public class PhotoAlbumController {
 		Response<PhotoAlbumEntity> response = new Response<PhotoAlbumEntity>();
 
 		try {
+			Optional<UserEntity> user = userService.findByUsername(album.getUser().getUsername());
 			PhotoAlbumEntity newAlbum = modelMapper.map(album, PhotoAlbumEntity.class);
+			newAlbum.setUser(user.get());
 			photoAlbumService.newAlbum(newAlbum);
 
 			response.setData(newAlbum);

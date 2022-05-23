@@ -63,7 +63,7 @@ public class AuthAPIController {
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             ExceptionTreatment.setExceptionMessage("Error while signing in. ", e, response, log);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
         }
     }
 

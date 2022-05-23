@@ -4,13 +4,15 @@ import {
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { MessagesEnum } from '../enums/messages.enum';
+import { AuthService } from '../services/auth/auth.service';
 import { MessageService } from '../services/message.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
 
   constructor(
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {

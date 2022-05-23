@@ -5,6 +5,7 @@ import { User } from 'app/shared/models/user.model';
 import { LoginView } from 'app/shared/utils/views.utils';
 import { environment } from 'environments/environment';
 import { map, Observable } from 'rxjs';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +34,9 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
-  getUser(): User {
-    return {id: 'ac16b001-80f2-14c0-8180-f2ad6a490000', name: 'eu', username: 'nozi'};
+  getUsername(): string {
+    let decodedToken = this.getDecodedAccessToken(localStorage.getItem('access_token')!)
+    return decodedToken.sub
   }
 
   get isLoggedIn(): boolean {
@@ -42,8 +44,11 @@ export class AuthService {
     return authToken !== null ? true : false;
   }
 
-  // private getHeaders(): HttpHeaders {
-  //   const headers = new HttpHeaders({'content-type': 'application/json', accept: 'application/json'});
-  //   return headers;
-  // }
+  private getDecodedAccessToken(token: string): any {
+    try {
+      return jwt_decode(token);
+    } catch(Error) {
+      return null;
+    }
+  }
 }

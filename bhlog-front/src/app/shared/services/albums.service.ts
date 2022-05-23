@@ -14,8 +14,8 @@ export class AlbumsService {
     private http: HttpClient
   ) { }
 
-  getUserAlbums(userId: string): Observable<PhotoAlbum[]>{
-    return this.http.get<ResponseModel>(`${environment.serverUrl}/bhlog/albums/user/${userId}`).pipe(
+  getUserAlbums(username: string): Observable<PhotoAlbum[]>{
+    return this.http.get<ResponseModel>(`${environment.serverUrl}/bhlog/albums/${username}`).pipe(
       map((response: ResponseModel) => {
         const resp: PhotoAlbum[] = response.data;
         return resp

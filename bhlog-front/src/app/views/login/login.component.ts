@@ -31,8 +31,10 @@ export class LoginComponent implements OnInit {
 
   signIn(){
     let formData = this.loginForm.getRawValue()
-    this.authService.login(formData.username, formData.password).subscribe(() => {
-      this.router.navigate([`/${HomeView.url}`])
+    this.authService.login(formData.username, formData.password).subscribe((res) => {
+      if (res) {
+        this.router.navigate([`/${HomeView.url}`])
+      }
     })
   }
 

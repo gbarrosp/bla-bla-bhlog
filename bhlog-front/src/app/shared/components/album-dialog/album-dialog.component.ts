@@ -41,7 +41,7 @@ export class AlbumDialogComponent implements OnInit {
       let album: PhotoAlbum = new PhotoAlbum()
       album.title = this.albumForm.get('title')?.value
       album.description = this.albumForm.get('description')?.value
-      album.user.id = this.authService.getUser().id
+      album.user.username = this.authService.getUsername()
       this.saveAlbum(album)
     } else {
       this.messageService.showMessage(MessagesEnum.INVALID_FORM)

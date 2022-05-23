@@ -28,7 +28,7 @@ export class PhotoAlbumsComponent implements OnInit {
   }
 
   async getUserAlbums(){
-    const albums = await lastValueFrom(this.albumsService.getUserAlbums(this.authService.getUser().id!))
+    const albums = await lastValueFrom(this.albumsService.getUserAlbums(this.authService.getUsername()))
     this.albums = albums
   }
 
