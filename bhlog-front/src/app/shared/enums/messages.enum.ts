@@ -5,5 +5,6 @@ export enum MessagesEnum {
   INTERNAL_SERVER_ERROR = 'Erro interno no servidor',
   SUCCESS = 'Dados registrados com sucesso!',
   DELETE_SUCCESS = 'Dados registrados com sucesso!',
-  INVALID_FORM = 'Preencha todos os dados'
+  INVALID_FORM = 'Preencha todos os dados',
+  MISMATCH_PASSWORD = 'As senhas não conferem'
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/shared/services/auth/auth.service';
 import { HomeView, SignUpView } from 'app/shared/utils/views.utils';
 
 @Component({
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -28,17 +30,10 @@ export class LoginComponent implements OnInit {
   }
 
   signIn(){
-    this.router.navigate([`/${HomeView.url}`])
-
-    // let formData = this.loginForm.getRawValue()
-    // this.authService.login(formData.username, formData.password).subscribe(
-    //   (response)=>{
-    //     this.router.navigate([Views.patients.url])
-    //   },
-    //   (error)=>{
-    //     console.log(error)
-    //   }
-    // )
+    let formData = this.loginForm.getRawValue()
+    this.authService.login(formData.username, formData.password).subscribe(() => {
+      this.router.navigate([`/${HomeView.url}`])
+    })
   }
 
   goToSignUp(){

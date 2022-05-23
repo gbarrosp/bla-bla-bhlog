@@ -38,6 +38,7 @@ import { AlbumDialogComponent } from './shared/components/album-dialog/album-dia
 import { PostDialogComponent } from './shared/components/post-dialog/post-dialog.component';
 import { SimplemdeModule } from 'ngx-simplemde';
 import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -78,6 +79,7 @@ import { MarkdownModule } from 'ngx-markdown';
     MatSnackBarModule,
     MatDialogModule,
     MatSelectModule,
+    HttpClientModule,
     MarkdownModule.forRoot(),
     SimplemdeModule.forRoot({
       options: {
