@@ -22,6 +22,8 @@ export class PhotosComponent implements OnInit {
   }
 
   addPhoto(){
-    this.dialog.open(PhotoDialogComponent)
+    this.dialog.open(PhotoDialogComponent, {
+      width: '400px'
+    })
   }
 }

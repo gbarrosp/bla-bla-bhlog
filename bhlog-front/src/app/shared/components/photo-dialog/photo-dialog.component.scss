@@ -1,3 +1,18 @@
 .file-input {
   display: none;
 }
+
+.title {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.file-name {
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+mat-divider {
+  margin: 20px 0;
+}

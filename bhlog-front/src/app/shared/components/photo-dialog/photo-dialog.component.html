@@ -1,6 +1,6 @@
-<form [formGroup]="photoForm" (ngSubmit)="addPhoto()">
+<form [formGroup]="photoForm">
   <div fxLayout="column">
-    <span>
+    <span class="title">
       Nova Foto
     </span>
     <mat-form-field appearance="outline">
@@ -11,15 +11,29 @@
       <mat-label>Descrição (opcional)</mat-label>
       <input matInput formControlName="description">
     </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Álbum</mat-label>
+      <mat-select formControlName="album">
+        <mat-option *ngFor="let album of albums" [value]="album.id">
+          {{album.title}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <input type="file" class="file-input" accept="image/*" (change)="onFileSelected($event)" #fileUpload>
-    <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="file-name">
       <span>
-        {{fileName || "Escolher imagem"}}
+        {{fileName || "Escolha uma imagem*"}}
       </span>
       <button mat-mini-fab class="pink-button"
         (click)="fileUpload.click()">
           <mat-icon>file_upload</mat-icon>
       </button>
     </div>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+      <button mat-stroked-button (click)="close()" class="pink-text" fxFlex>VOLTAR</button>
+      <button mat-raised-button (click)="addPhoto()" class="pink-button" fxFlex>SALVAR</button>
+    </div>
+
   </div>
 </form>
