@@ -77,12 +77,14 @@ public class AuthAPIController {
 				return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
 			}
             
+            String decodedPassword = user.getPassword();
 			user.setPassword(encoder.encode(user.getPassword()));
 			userService.saveUser(user);
-            response.setData(getAuthToken(user.getUsername(), user.getPassword()));
+            response.setData(getAuthToken(user.getUsername(), decodedPassword));
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+            response.setError(e.getMessage());
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
