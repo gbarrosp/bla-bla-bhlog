@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MessagesEnum } from 'app/shared/enums/messages.enum';
 import { PhotoAlbum } from 'app/shared/models/photo-album.model';
 import { AlbumsService } from 'app/shared/services/albums.service';
@@ -17,7 +17,6 @@ export class AlbumDialogComponent implements OnInit {
   albumForm!: FormGroup;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<AlbumDialogComponent>,
     private messageService: MessageService,

@@ -35,6 +35,7 @@ import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
 import { AlbumDialogComponent } from './shared/components/album-dialog/album-dialog.component';
+import { PostDialogComponent } from './shared/components/post-dialog/post-dialog.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { AlbumDialogComponent } from './shared/components/album-dialog/album-dia
     PhotoAlbumComponent,
     HeaderComponent,
     PhotoDialogComponent,
-    AlbumDialogComponent
+    AlbumDialogComponent,
+    PostDialogComponent
   ],
   imports: [
     BrowserModule,

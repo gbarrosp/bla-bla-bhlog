@@ -1,0 +1,17 @@
+<form [formGroup]="postForm">
+  <div fxLayout="column">
+    <span class="title">
+      Novo Post
+    </span>
+    <mat-form-field appearance="outline">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+      <button mat-stroked-button (click)="close()" class="pink-text" fxFlex>VOLTAR</button>
+      <button mat-raised-button (click)="addPost()" class="pink-button" fxFlex>SALVAR</button>
+    </div>
+
+  </div>
+</form>
