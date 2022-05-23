@@ -1,4 +1,16 @@
-<p>photo-albums works!</p>
+<mat-grid-list cols="5" rowHeight="250px">
+  <mat-grid-tile *ngFor="let album of albums">
+    <mat-card (click)="openAlbum(album.id)">
+      <div fxFill fxLayout="column" fxLayoutAlign="start start">
+        <div fxFill fxFlex="50" fxLayout="row" fxLayoutAlign="center">
+          <mat-icon>perm_media</mat-icon>
+        </div>
+        <span fxFlex="25" class="title">{{album.title}}</span>
+        <span fxFlex="25" class="description">{{album.description}}</span>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
 
 <button mat-fab class="fab-button">
   <mat-icon>create_new_folder</mat-icon>

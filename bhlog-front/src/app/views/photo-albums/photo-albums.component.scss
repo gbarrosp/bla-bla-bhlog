@@ -1,0 +1,24 @@
+mat-card {
+  width: 170px;
+  height: 150px;
+  cursor: pointer;
+  mat-icon {
+    font-size: 65px;
+    width: 65px;
+    height: 65px;
+  }
+}
+
+
+.title {
+  font-weight: bold;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+::ng-deep .mat-grid-tile-content {
+  align-items: start !important;
+}

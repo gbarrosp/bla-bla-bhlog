@@ -2,6 +2,6 @@ mat-grid-tile {
   padding: 0
 }
 
-.mat-grid-tile-content {
-  display: block !important;
+::ng-deep .mat-grid-tile-content {
+  align-items: start !important;
 }
