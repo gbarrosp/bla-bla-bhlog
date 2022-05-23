@@ -23,7 +23,7 @@ export class PostsComponent implements OnInit {
 
   addPost(){
     this.dialog.open(PostDialogComponent, {
-      width: '400px'
+      width: '800px'
     })
   }
 }

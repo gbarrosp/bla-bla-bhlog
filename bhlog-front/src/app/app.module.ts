@@ -36,6 +36,8 @@ import { PostsComponent } from './views/posts/posts.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
 import { AlbumDialogComponent } from './shared/components/album-dialog/album-dialog.component';
 import { PostDialogComponent } from './shared/components/post-dialog/post-dialog.component';
+import { SimplemdeModule } from 'ngx-simplemde';
+import { MarkdownModule } from 'ngx-markdown';
 
 
 @NgModule({
@@ -75,7 +77,13 @@ import { PostDialogComponent } from './shared/components/post-dialog/post-dialog
     MatMenuModule,
     MatSnackBarModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MarkdownModule.forRoot(),
+    SimplemdeModule.forRoot({
+      options: {
+        autosave: { enabled: true },
+      },
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

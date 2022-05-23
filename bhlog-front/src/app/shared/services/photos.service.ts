@@ -170,7 +170,7 @@ export class PhotosService {
     return []
   }
 
-  addPhoto(photo: Photo){
+  newPhoto(photo: Photo){
     console.log(photo)
   }
 

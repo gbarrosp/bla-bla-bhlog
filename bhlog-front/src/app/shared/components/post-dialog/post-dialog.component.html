@@ -7,11 +7,11 @@
       <mat-label>Título</mat-label>
       <input matInput formControlName="title">
     </mat-form-field>
+    <simplemde formControlName="content"></simplemde>
     <mat-divider></mat-divider>
-    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
-      <button mat-stroked-button (click)="close()" class="pink-text" fxFlex>VOLTAR</button>
-      <button mat-raised-button (click)="addPost()" class="pink-button" fxFlex>SALVAR</button>
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="15px">
+      <button [style.width.px]="150" mat-stroked-button (click)="close()" class="pink-text">CANCELAR</button>
+      <button [style.width.px]="150" mat-raised-button (click)="addPost()" class="pink-button">SALVAR</button>
     </div>
-
   </div>
 </form>

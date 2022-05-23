@@ -58,10 +58,18 @@ export class PhotoDialogComponent implements OnInit {
       photo.photo_album.id = this.photoForm.get('album')?.value
       photo.content = this.file
       photo.created_at = new Date().toISOString()
-      this.photoService.addPhoto(photo)
-      this.close()
+      this.savePhoto(photo)
     } else {
       this.messageService.showMessage(MessagesEnum.INVALID_FORM)
+    }
+  }
+
+  async savePhoto(photo: Photo) {
+    try {
+      this.photoService.newPhoto(photo)
+      this.close()
+    } catch (e) {
+      this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)
     }
   }
 

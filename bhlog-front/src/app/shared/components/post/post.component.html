@@ -5,7 +5,7 @@
     <span>{{post.created_at | date:'dd/MM/YYYY'}}</span>
   </div>
   <mat-card-content>
-    {{post.content}}
+    <markdown [data]="post.content"></markdown>
   </mat-card-content>
   <mat-card-actions align="end">
     <button mat-button>

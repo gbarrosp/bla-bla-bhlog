@@ -31,9 +31,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/styles.less"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/simplemde-antd/dist/simplemde.min.js",
+              "node_modules/marked/marked.min.js"
+            ]
           },
           "configurations": {
             "production": {
