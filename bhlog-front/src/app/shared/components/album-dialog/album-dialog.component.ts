@@ -6,6 +6,7 @@ import { PhotoAlbum } from 'app/shared/models/photo-album.model';
 import { AlbumsService } from 'app/shared/services/albums.service';
 import { AuthService } from 'app/shared/services/auth/auth.service';
 import { MessageService } from 'app/shared/services/message.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-album-dialog',
@@ -40,7 +41,7 @@ export class AlbumDialogComponent implements OnInit {
       let album: PhotoAlbum = new PhotoAlbum()
       album.title = this.albumForm.get('title')?.value
       album.description = this.albumForm.get('description')?.value
-      album.user = this.authService.getUser()
+      album.user.id = this.authService.getUser().id
       this.saveAlbum(album)
     } else {
       this.messageService.showMessage(MessagesEnum.INVALID_FORM)
@@ -49,7 +50,7 @@ export class AlbumDialogComponent implements OnInit {
 
   async saveAlbum(album: PhotoAlbum) {
     try {
-      this.albumService.newAlbum(album)
+      await lastValueFrom(this.albumService.newAlbum(album))
       this.close()
     } catch (e) {
       this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)

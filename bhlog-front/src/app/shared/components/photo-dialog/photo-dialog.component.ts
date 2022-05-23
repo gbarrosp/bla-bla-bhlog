@@ -5,8 +5,10 @@ import { MessagesEnum } from 'app/shared/enums/messages.enum';
 import { PhotoAlbum } from 'app/shared/models/photo-album.model';
 import { Photo } from 'app/shared/models/photo.model';
 import { AlbumsService } from 'app/shared/services/albums.service';
+import { AuthService } from 'app/shared/services/auth/auth.service';
 import { MessageService } from 'app/shared/services/message.service';
 import { PhotosService } from 'app/shared/services/photos.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-photo-dialog',
@@ -25,12 +27,13 @@ export class PhotoDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<PhotoDialogComponent>,
     private messageService: MessageService,
     private photoService: PhotosService,
-    private albumService: AlbumsService
+    private albumsService: AlbumsService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.initForm();
-    this.albums = this.albumService.getUserAlbums('')
+    this.getUserAlbums();
   }
 
   initForm() {
@@ -39,6 +42,11 @@ export class PhotoDialogComponent implements OnInit {
       description: [null],
       album: [null, Validators.required],
     });
+  }
+
+  async getUserAlbums(){
+    const albums = await lastValueFrom(this.albumsService.getUserAlbums(this.authService.getUser().id!))
+    this.albums = albums
   }
 
   onFileSelected(event: any) {

@@ -17,11 +17,11 @@ export class AuthService {
   ) { }
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<Response>(`${environment.serverUrl}/auth/login`,JSON.stringify({ username: username, password: password }), { headers: this.getHeaders() })
+    return this.http.post<Response>(`${environment.serverUrl}/auth/login`,JSON.stringify({ username: username, password: password }))
   }
 
   signUp(user: User): Observable<any> {
-    return this.http.post<Response>(`${environment.serverUrl}/auth/sign-up`, user, { headers: this.getHeaders() })
+    return this.http.post<Response>(`${environment.serverUrl}/auth/sign-up`, user)
   }
 
   logOut(){
@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   getUser(): User {
-    return {id: '1', name: 'eu', username: 'nozi'};
+    return {id: 'ac16b001-80f2-14c0-8180-f2ad6a490000', name: 'eu', username: 'nozi'};
   }
 
   get isLoggedIn(): boolean {
@@ -42,8 +42,8 @@ export class AuthService {
     return authToken !== null ? true : false;
   }
 
-  private getHeaders(): HttpHeaders {
-    const headers = new HttpHeaders({'content-type': 'application/json', accept: 'application/json'});
-    return headers;
-  }
+  // private getHeaders(): HttpHeaders {
+  //   const headers = new HttpHeaders({'content-type': 'application/json', accept: 'application/json'});
+  //   return headers;
+  // }
 }

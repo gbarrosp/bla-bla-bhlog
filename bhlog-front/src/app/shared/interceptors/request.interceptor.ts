@@ -17,7 +17,10 @@ export class RequestInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let apiEndpoints = ['bhlog-back']
+    request = request.clone({
+      setHeaders: {'content-type': 'application/json', accept: 'application/json'}
+    })
+    let apiEndpoints = ['api/bhlog']
     if ((new RegExp(apiEndpoints.join('|')).test(request.url!))){
       const token = this.authService.getToken();
       if (token){

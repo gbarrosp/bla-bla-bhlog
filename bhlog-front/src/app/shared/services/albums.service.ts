@@ -1,181 +1,29 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'environments/environment';
+import { map, Observable } from 'rxjs';
 import { PhotoAlbum } from '../models/photo-album.model';
+import { ResponseModel } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlbumsService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  getUserAlbums(userId: string): PhotoAlbum[]{
-    return [
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-      {
-        id: '1',
-        title: 'Meu Primeiro Album',
-        description: 'As fotos mais lindas',
-        user: {
-          id: '1',
-          name: 'gugu',
-          username: 'gbarrosp'
-        }
-      },
-    ]
+  getUserAlbums(userId: string): Observable<PhotoAlbum[]>{
+    return this.http.get<ResponseModel>(`${environment.serverUrl}/bhlog/albums/user/${userId}`).pipe(
+      map((response: ResponseModel) => {
+        const resp: PhotoAlbum[] = response.data;
+        return resp
+      }));
   }
 
-  newAlbum(album: PhotoAlbum): PhotoAlbum {
-    console.log(album)
-    return album
+  newAlbum(album: PhotoAlbum): Observable<PhotoAlbum> {
+    return this.http.post<PhotoAlbum>(`${environment.serverUrl}/bhlog/albums`, album)
   }
 
   editAlbum(album: PhotoAlbum): PhotoAlbum {

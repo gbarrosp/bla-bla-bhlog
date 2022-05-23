@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { AlbumDialogComponent } from 'app/shared/components/album-dialog/album-dialog.component';
 import { PhotoAlbum } from 'app/shared/models/photo-album.model';
 import { AlbumsService } from 'app/shared/services/albums.service';
+import { AuthService } from 'app/shared/services/auth/auth.service';
 import { PhotoAlbumView } from 'app/shared/utils/views.utils';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   templateUrl: './photo-albums.component.html',
@@ -17,11 +19,17 @@ export class PhotoAlbumsComponent implements OnInit {
   constructor(
     private router: Router,
     private dialog: MatDialog,
-    private albumsService: AlbumsService
+    private albumsService: AlbumsService,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    this.albums = this.albumsService.getUserAlbums('')
+    this.getUserAlbums()
+  }
+
+  async getUserAlbums(){
+    const albums = await lastValueFrom(this.albumsService.getUserAlbums(this.authService.getUser().id!))
+    this.albums = albums
   }
 
   openAlbum(albumId: string){
@@ -29,8 +37,11 @@ export class PhotoAlbumsComponent implements OnInit {
   }
 
   addAlbum(){
-    this.dialog.open(AlbumDialogComponent, {
+    let dialogRed = this.dialog.open(AlbumDialogComponent, {
       width: '320px'
+    })
+    dialogRed.afterClosed().subscribe(() => {
+      this.getUserAlbums()
     })
   }
 }
