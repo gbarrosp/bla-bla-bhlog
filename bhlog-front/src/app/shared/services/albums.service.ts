@@ -174,6 +174,7 @@ export class AlbumsService {
   }
 
   newAlbum(album: PhotoAlbum): PhotoAlbum {
+    console.log(album)
     return album
   }
 

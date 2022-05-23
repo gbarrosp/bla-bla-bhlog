@@ -1,0 +1,21 @@
+<form [formGroup]="albumForm">
+  <div fxLayout="column">
+    <span class="title">
+      Novo Álbum
+    </span>
+    <mat-form-field appearance="outline">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Descrição (opcional)</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="15px">
+      <button mat-stroked-button (click)="close()" class="pink-text" fxFlex>VOLTAR</button>
+      <button mat-raised-button (click)="addAlbum()" class="pink-button" fxFlex>SALVAR</button>
+    </div>
+
+  </div>
+</form>
