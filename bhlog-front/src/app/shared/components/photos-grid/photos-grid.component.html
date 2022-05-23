@@ -1,5 +1,7 @@
-<mat-grid-list cols="3" rowHeight="400px">
-  <mat-grid-tile *ngFor="let photo of photos">
-    <app-photo [photo]="photo"></app-photo>
-  </mat-grid-tile>
-</mat-grid-list>
+<div [style.maxWidth.px]="1500" [ngStyle]="{'margin': 'auto'}">
+  <mat-grid-list cols="3" rowHeight="400px">
+    <mat-grid-tile *ngFor="let photo of photos">
+      <app-photo [photo]="photo"></app-photo>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
