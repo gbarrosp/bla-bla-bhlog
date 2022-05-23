@@ -30,6 +30,8 @@ public class PhotoEntity extends UUIDEntity {
     @NotEmpty
 	private String title;
 
+	private String description;
+
     @NotEmpty
 	private String content;
 

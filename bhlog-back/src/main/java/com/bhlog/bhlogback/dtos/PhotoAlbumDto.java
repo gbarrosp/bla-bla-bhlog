@@ -10,6 +10,8 @@ public class PhotoAlbumDto {
 	private UUID id;
 	
 	private String title;
+	
+	private String description;
 
 	private UserDto user;
 

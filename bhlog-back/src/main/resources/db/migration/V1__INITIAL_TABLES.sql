@@ -42,6 +42,7 @@ ALTER TABLE "comment"
 CREATE TABLE "photo_album" (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     title varchar(90),
+    "description" varchar(200),
     "user_id" uuid
 );
 
@@ -53,6 +54,7 @@ ALTER TABLE "photo_album"
 CREATE TABLE "photo" (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     title varchar(90),
+    "description" varchar(200),
     content text,
     created_at timestamp without time zone,
     "photo_album_id" uuid

@@ -29,4 +29,6 @@ public class PhotoAlbumEntity extends UUIDEntity {
     @NotEmpty
 	private String title;
 
+	private String description;
+
 }
