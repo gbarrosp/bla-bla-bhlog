@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhotoAlbum } from 'app/shared/models/photo-album.model';
+import { AlbumsService } from 'app/shared/services/albums.service';
 import { PhotoAlbumView } from 'app/shared/utils/views.utils';
 
 @Component({
@@ -9,174 +10,15 @@ import { PhotoAlbumView } from 'app/shared/utils/views.utils';
 })
 export class PhotoAlbumsComponent implements OnInit {
 
-  albums: PhotoAlbum[] = [
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-    {
-      id: '1',
-      title: 'Meu Primeiro Album',
-      description: 'As fotos mais lindas',
-      user: {
-        id: '1',
-        name: 'gugu',
-        username: 'gbarrosp'
-      }
-    },
-  ]
+  albums!: PhotoAlbum[]
 
   constructor(
-    private router: Router
+    private router: Router,
+    private albumsService: AlbumsService
   ) { }
 
   ngOnInit(): void {
+    this.albums = this.albumsService.getUserAlbums('')
   }
 
   openAlbum(albumId: string){

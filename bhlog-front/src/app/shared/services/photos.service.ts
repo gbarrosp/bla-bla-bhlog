@@ -165,4 +165,20 @@ export class PhotosService {
       },
     ]
   }
+
+  getAlbumPhotos(albumId: string): Photo[]{
+    return []
+  }
+
+  addPhoto(){
+
+  }
+
+  editPhoto(){
+
+  }
+
+  deletePhoto(){
+
+  }
 }
