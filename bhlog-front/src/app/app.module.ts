@@ -1,3 +1,4 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +20,9 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { PhotoComponent } from './shared/components/photo/photo.component';
 import { PhotosGridComponent } from './shared/components/photos-grid/photos-grid.component';
 import { PostComponent } from './shared/components/post/post.component';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { RequestInterceptor } from './shared/interceptors/request.interceptor';
+import { ServerErrorInterceptor } from './shared/interceptors/server-error.interceptor';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { PhotoAlbumComponent } from './views/photo-album/photo-album.component';
@@ -62,7 +66,11 @@ import { SignUpComponent } from './views/sign-up/sign-up.component';
     MatGridListModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ServerErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

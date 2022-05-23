@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/shared/services/auth/auth.service';
 import { HomeView, LoginView, PhotosView, PostsView } from 'app/shared/utils/views.utils';
 
 @Component({
@@ -11,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -21,7 +23,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logout(){
-    localStorage.clear()
-    this.router.navigate([`${LoginView.url}`])
+    this.authService.logOut()
   }
 }

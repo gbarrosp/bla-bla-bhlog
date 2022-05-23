@@ -1,31 +1,25 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpResponse
+  HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ResponseModel } from '@shared/models/response.model';
-import { MessageService } from '@shared/services/message.service';
-import { MessagesEnum } from '@shared/enums/messages.enum';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { AuthService } from '@shared/services/auth/auth.service';
+import { MessagesEnum } from '../enums/messages.enum';
+import { ResponseModel } from '../models/response.model';
+import { AuthService } from '../services/auth/auth.service';
+import { MessageService } from '../services/message.service';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
 
   constructor(
-    private oAuthService: OAuthService,
-    private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authService: AuthService
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let apiEndpoints = ['5010', 'loop-bff']
+    let apiEndpoints = ['bhlog-back']
     if ((new RegExp(apiEndpoints.join('|')).test(request.url!))){
-      let token = this.oAuthService.getAccessToken();
+      const token = JSON.parse(localStorage.getItem('token')!);
       if (token){
         request = request.clone({
           setHeaders: {
@@ -33,22 +27,16 @@ export class RequestInterceptor implements HttpInterceptor {
           }
         })
       } else {
-        this.authService.logout()
+        this.authService.logOut()
       }
     }
     return next.handle(request).pipe(map((event: HttpEvent<any>) => {
       if (event instanceof HttpResponse && (new RegExp(apiEndpoints.join('|')).test(event.url!))) {
         let response: ResponseModel = event.body
-        if (response.notifications){
-          if (Object.values(response.notifications).length > 0) {
-            this.messageService.openDialog(false, this.messageService.getMessages(response.notifications))
-          } else if (request.method === "DELETE") {
-            this.messageService.openDialog(false, MessagesEnum.DELETE_SUCCESS)
-          } else if (request.method !== "GET") {
-            this.messageService.openDialog(false, MessagesEnum.SUCCESS)
-          }
-        } else {
-          throw new Error('Invalid response.');
+        if (request.method === "DELETE") {
+          this.messageService.showMessage(MessagesEnum.DELETE_SUCCESS)
+        } else if (request.method !== "GET") {
+          this.messageService.showMessage(MessagesEnum.SUCCESS)
         }
       }
       return event;
