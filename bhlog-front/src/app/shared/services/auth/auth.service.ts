@@ -15,4 +15,13 @@ export class AuthService {
     localStorage.clear()
     this.router.navigate([`${LoginView.url}`])
   }
+
+  getToken() {
+    return localStorage.getItem('access_token');
+  }
+
+  get isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('access_token');
+    return authToken !== null ? true : false;
+  }
 }

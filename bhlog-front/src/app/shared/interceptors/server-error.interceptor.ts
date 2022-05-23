@@ -2,9 +2,9 @@ import {
   HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MessagesEnum } from '@shared/enums/messages.enum';
-import { MessageService } from '@shared/services/message.service';
 import { catchError, Observable, throwError } from 'rxjs';
+import { MessagesEnum } from '../enums/messages.enum';
+import { MessageService } from '../services/message.service';
 
 @Injectable()
 export class ServerErrorInterceptor implements HttpInterceptor {
@@ -25,16 +25,16 @@ export class ServerErrorInterceptor implements HttpInterceptor {
   private serverErrorHandler(error: HttpErrorResponse){
     if (error.status === 400){
       if (this.validError(error)) {
-        this.messageService.openDialog(true, this.messageService.getMessages(error.error.errors))
+        this.messageService.showMessage(error.error.errors)
       } else {
-        this.messageService.openDialog(true, MessagesEnum.INTERNAL_SERVER_ERROR)
+        this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)
       }
     } else if (error.status === 401) {
-      this.messageService.openDialog(true, MessagesEnum.ERROR_401)
+      this.messageService.showMessage(MessagesEnum.ERROR_401)
     } else if (error.status === 403) {
-      this.messageService.openDialog(true, MessagesEnum.ERROR_403)
+      this.messageService.showMessage(MessagesEnum.ERROR_403)
     } else if (error.status === 500) {
-      this.messageService.openDialog(true, MessagesEnum.INTERNAL_SERVER_ERROR)
+      this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)
     }
   }
 

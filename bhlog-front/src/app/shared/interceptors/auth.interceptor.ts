@@ -18,7 +18,7 @@ export class AuthInterceptor implements HttpInterceptor {
       let authEndpoints = ['login', 'sign-up']
       if (event instanceof HttpResponse && (new RegExp(authEndpoints.join('|')).test(event.url!))) {
         if (request.method === 'POST' && event.body) {
-          localStorage.setItem('currentUser', JSON.stringify(event.body.data));
+          localStorage.setItem('access_token', event.body.data);
         }
       }
       return event
