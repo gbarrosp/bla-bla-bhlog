@@ -1,0 +1,25 @@
+<form [formGroup]="photoForm" (ngSubmit)="addPhoto()">
+  <div fxLayout="column">
+    <span>
+      Nova Foto
+    </span>
+    <mat-form-field appearance="outline">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Descrição (opcional)</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <input type="file" class="file-input" accept="image/*" (change)="onFileSelected($event)" #fileUpload>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <span>
+        {{fileName || "Escolher imagem"}}
+      </span>
+      <button mat-mini-fab class="pink-button"
+        (click)="fileUpload.click()">
+          <mat-icon>file_upload</mat-icon>
+      </button>
+    </div>
+  </div>
+</form>
