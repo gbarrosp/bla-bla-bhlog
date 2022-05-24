@@ -1,5 +1,10 @@
 package com.bhlog.bhlogback.controllers;
 
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 
 import com.bhlog.bhlogback.dtos.PhotoDto;
@@ -12,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,31 +35,33 @@ public class PhotoController {
     @Autowired
     private ModelMapper modelMapper;
 
-    // @GetMapping(value = "/all")
-	// public ResponseEntity<Response<List<DoctorDto>>> getAllDoctors() {
-	// 	Response<List<DoctorDto>> response = new Response<List<DoctorDto>>();
+    @GetMapping
+	public ResponseEntity<Response<List<PhotoEntity>>> getAllPhotos() {
+		Response<List<PhotoEntity>> response = new Response<List<PhotoEntity>>();
 
-	// 	try {
-	// 		List<PostEntity> doctorsList = doctorService.getAllDoctors();
-	// 		List<DoctorDto> doctorsDtos = doctorsList.stream().map(doctor -> modelMapper.map(doctor, DoctorDto.class)).collect(Collectors.toList());
+		try {
+			List<PhotoEntity> photos = photoService.getAllPhotos();
+			// List<PhotoDto> photosDtos = new ArrayList<PhotoDto>();
+			//  photos.stream().forEach(photo -> {
+			// 	PhotoDto photoDto = modelMapper.map(photo, PhotoDto.class);
+			// 	photoDto.setContent(Base64.getEncoder().encodeToString(photoDto.getContent().getBytes()));
+			// 	photosDtos.add(photoDto);
+			// });
+			response.setData(photos);
+			return ResponseEntity.ok(response);
 
-	// 		response.setData(doctorsDtos);
-	// 		return ResponseEntity.ok(response);
-
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-	// 	}
-	// }
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
 
     @PostMapping
-	public ResponseEntity<Response<PhotoEntity>> newPatient(@RequestBody @Valid PhotoDto photo) {
+	public ResponseEntity<Response<PhotoEntity>> newPhoto(@RequestBody @Valid PhotoDto photo) {
 		Response<PhotoEntity> response = new Response<PhotoEntity>();
 
 		try {
 			PhotoEntity newPhoto = modelMapper.map(photo, PhotoEntity.class);
-			// newPhoto.setContent(photo.getContent().getBytes());
-			// PhotoEntity newPhoto = new PhotoEntity();
-			// newPhoto.setContent(photo.getBytes());
+			// newPhoto.setContent(Base64.getEncoder().encode(photo.getContent().getBytes()));
 			photoService.newPhoto(newPhoto);
 
 			response.setData(newPhoto);

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PhotoDialogComponent } from 'app/shared/components/photo-dialog/photo-dialog.component';
 import { Photo } from 'app/shared/models/photo.model';
 import { PhotosService } from 'app/shared/services/photos.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   templateUrl: './photos.component.html',
@@ -18,7 +19,12 @@ export class PhotosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.photos = this.photosService.getAllPhotos()
+    this.getAllPhotos()
+  }
+
+  async getAllPhotos(){
+    const photos = await lastValueFrom(this.photosService.getAllPhotos())
+    this.photos = photos
   }
 
   addPhoto(){
