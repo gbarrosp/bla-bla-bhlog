@@ -1,5 +1,5 @@
 <mat-card class="post">
-  <mat-card-title>{{post.title}}</mat-card-title>
+  <mat-card-title><span class="title">{{post.title}}</span></mat-card-title>
   <div fxLayout="row" fxLayoutAlign="space-between">
     <span>{{post.user.username}}</span>
     <span>{{post.createdAt | date:'dd/MM/YYYY'}}</span>

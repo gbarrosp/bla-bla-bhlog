@@ -17,7 +17,7 @@ export class PostService {
   getAllPosts(): Observable<Post[]>{
     return this.http.get<ResponseModel>(`${environment.serverUrl}/bhlog/posts`).pipe(
       map((response: ResponseModel) => {
-        const resp: Post[] = response.data;
+        const resp: Post[] = response.data.sort((a: Post,b: Post) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
         return resp
       }));
   }

@@ -24,6 +24,7 @@ export class PostsComponent implements OnInit {
 
   async getAllPosts(){
     const posts = await lastValueFrom(this.postService.getAllPosts())
+    console.log(posts)
     this.posts = posts
   }
 
