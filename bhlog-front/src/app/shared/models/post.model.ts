@@ -5,6 +5,6 @@ export class Post {
   user!: User;
   title!: string;
   content!: any;
-  created_at!: string;
+  createdAt!: string;
   commentsCounter!: number;
 }

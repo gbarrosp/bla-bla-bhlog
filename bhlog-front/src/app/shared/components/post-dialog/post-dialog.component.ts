@@ -46,7 +46,7 @@ export class PostDialogComponent implements OnInit {
       post.title = this.postForm.get('title')?.value
       post.content = this.postForm.get('content')?.value
       post.commentsCounter = 0
-      post.created_at = new Date().toISOString()
+      post.createdAt = new Date().toISOString()
       post.user.username = this.authService.getUsername()
       this.savePost(post)
     } else {

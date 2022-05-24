@@ -21,6 +21,7 @@ export class PhotoDialogComponent implements OnInit {
   fileName!: string;
   file?: File;
   albums!: PhotoAlbum[];
+  photo: Photo = new Photo();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -54,19 +55,22 @@ export class PhotoDialogComponent implements OnInit {
     if (file) {
       this.fileName = file.name;
       this.file = file;
-      console.log(file)
+      const reader = new FileReader();
+      reader.readAsDataURL(this.file);
+      reader.onload = (e: any) => {
+        const bytes = e.target.result.split('base64,')[1];
+        this.photo.content = bytes
+      };
     }
   }
 
   addPhoto(){
     if (this.photoForm.valid && this.file) {
-      let photo: Photo = new Photo()
-      photo.title = this.photoForm.get('title')?.value
-      photo.description = this.photoForm.get('description')?.value
-      photo.photo_album.id = this.photoForm.get('album')?.value
-      photo.content = this.file
-      photo.created_at = new Date().toISOString()
-      this.savePhoto(photo)
+      this.photo.title = this.photoForm.get('title')?.value
+      this.photo.description = this.photoForm.get('description')?.value
+      this.photo.photoAlbum.id = this.photoForm.get('album')?.value
+      this.photo.createdAt = new Date().toISOString()
+      this.savePhoto(this.photo)
     } else {
       this.messageService.showMessage(MessagesEnum.INVALID_FORM)
     }
@@ -74,7 +78,7 @@ export class PhotoDialogComponent implements OnInit {
 
   async savePhoto(photo: Photo) {
     try {
-      this.photoService.newPhoto(photo)
+      await lastValueFrom(this.photoService.newPhoto(photo))
       this.close()
     } catch (e) {
       this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)

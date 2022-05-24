@@ -55,7 +55,7 @@ CREATE TABLE "photo" (
     id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
     title varchar(90),
     "description" varchar(200),
-    content text,
+    content bytea,
     created_at timestamp without time zone,
     "photo_album_id" uuid
 );

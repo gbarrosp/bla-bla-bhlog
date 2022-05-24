@@ -5,6 +5,6 @@ export class Photo {
   title!: string;
   content!: any;
   description?: string;
-  created_at!: string;
-  photo_album: PhotoAlbum = new PhotoAlbum();
+  createdAt!: string;
+  photoAlbum: PhotoAlbum = new PhotoAlbum();
 }
