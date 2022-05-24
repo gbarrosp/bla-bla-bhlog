@@ -7,6 +7,7 @@ import { AuthService } from 'app/shared/services/auth/auth.service';
 import { MessageService } from 'app/shared/services/message.service';
 import { PostService } from 'app/shared/services/post.service';
 import { SimplemdeComponent, SimplemdeOptions } from 'ngx-simplemde';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-post-dialog',
@@ -56,14 +57,14 @@ export class PostDialogComponent implements OnInit {
 
   async savePost(post: Post) {
     try {
-      this.postService.newPost(post)
-      this.close()
+      await lastValueFrom(this.postService.newPost(post))
+      this.dialogRef.close(true)
     } catch (e) {
       this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)
     }
   }
 
   close() {
-    this.dialogRef.close()
+    this.dialogRef.close(false)
   }
 }

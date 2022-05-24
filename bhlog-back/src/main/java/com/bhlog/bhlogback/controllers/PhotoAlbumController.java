@@ -2,7 +2,6 @@ package com.bhlog.bhlogback.controllers;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -57,8 +56,8 @@ public class PhotoAlbumController {
 		}
 	}
 
-    @PostMapping()
-	public ResponseEntity<Response<PhotoAlbumEntity>> newPatient(@RequestBody @Valid PhotoAlbumDto album) {
+    @PostMapping
+	public ResponseEntity<Response<PhotoAlbumEntity>> newAlbum(@RequestBody @Valid PhotoAlbumDto album) {
 		Response<PhotoAlbumEntity> response = new Response<PhotoAlbumEntity>();
 
 		try {
@@ -76,13 +75,13 @@ public class PhotoAlbumController {
 	}
 
     // @DeleteMapping(value = "/delete")
-	// public ResponseEntity<Response<PhotoAlbumEntity>> deletePatiente(@RequestBody @Valid PhotoAlbumEntity patient) {
+	// public ResponseEntity<Response<PhotoAlbumEntity>> deleteAlbum(@RequestBody @Valid PhotoAlbumEntity album) {
 	// 	Response<PhotoAlbumEntity> response = new Response<PhotoAlbumEntity>();
 
 	// 	try {
-	// 		patientService.deletePatient(patient);
+	// 		albumService.deleteAlbum(album);
 
-	// 		response.setData(patient);
+	// 		response.setData(album);
 	// 		return ResponseEntity.ok(response);
 
 	// 	} catch (Exception e) {

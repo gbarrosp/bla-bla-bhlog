@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostDialogComponent } from 'app/shared/components/post-dialog/post-dialog.component';
 import { Post } from 'app/shared/models/post.model';
 import { PostService } from 'app/shared/services/post.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   templateUrl: './posts.component.html',
@@ -18,12 +19,22 @@ export class PostsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.posts = this.postService.getAllPosts()
+    this.getAllPosts()
+  }
+
+  async getAllPosts(){
+    const posts = await lastValueFrom(this.postService.getAllPosts())
+    this.posts = posts
   }
 
   addPost(){
-    this.dialog.open(PostDialogComponent, {
+    let dialogRef = this.dialog.open(PostDialogComponent, {
       width: '800px'
+    })
+    dialogRef.afterClosed().subscribe( newPost => {
+      if (newPost) {
+        this.getAllPosts()
+      }
     })
   }
 }

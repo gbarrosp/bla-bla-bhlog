@@ -1,13 +1,16 @@
 package com.bhlog.bhlogback.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
-import com.bhlog.bhlogback.dtos.PhotoDto;
-import com.bhlog.bhlogback.entities.PhotoEntity;
+import com.bhlog.bhlogback.dtos.PostDto;
+import com.bhlog.bhlogback.entities.PostEntity;
+import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
-import com.bhlog.bhlogback.services.PhotoService;
+import com.bhlog.bhlogback.services.PostService;
+import com.bhlog.bhlogback.services.UserService;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +25,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/bhlog/photos")
-public class PhotoController {
+@RequestMapping("/api/bhlog/posts")
+public class PostController {
 
     @Autowired
-    private PhotoService photoService;
+    private PostService postService;
+
+    @Autowired
+    private UserService userService;
 	
     @Autowired
     private ModelMapper modelMapper;
 
     @GetMapping
-	public ResponseEntity<Response<List<PhotoEntity>>> getAllPhotos() {
-		Response<List<PhotoEntity>> response = new Response<List<PhotoEntity>>();
+	public ResponseEntity<Response<List<PostEntity>>> getAllPosts() {
+		Response<List<PostEntity>> response = new Response<List<PostEntity>>();
 
 		try {
-			List<PhotoEntity> photos = photoService.getAllPhotos();
-			response.setData(photos);
+			List<PostEntity> posts = postService.getAllPosts();
+			response.setData(posts);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -46,13 +52,15 @@ public class PhotoController {
 	}
 
     @PostMapping
-	public ResponseEntity<Response<PhotoEntity>> newPhoto(@RequestBody @Valid PhotoDto photo) {
-		Response<PhotoEntity> response = new Response<PhotoEntity>();
+	public ResponseEntity<Response<PostEntity>> newPost(@RequestBody @Valid PostDto post) {
+		Response<PostEntity> response = new Response<PostEntity>();
 
 		try {
-			PhotoEntity newPhoto = modelMapper.map(photo, PhotoEntity.class);
-			photoService.newPhoto(newPhoto);
-			response.setData(newPhoto);
+			Optional<UserEntity> user = userService.findByUsername(post.getUser().getUsername());
+			PostEntity newPost = modelMapper.map(post, PostEntity.class);
+			newPost.setUser(user.get());
+			postService.newPost(newPost);
+			response.setData(newPost);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
