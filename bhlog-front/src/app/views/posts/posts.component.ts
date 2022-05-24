@@ -31,7 +31,8 @@ export class PostsComponent implements OnInit {
   addPost(){
     let dialogRef = this.dialog.open(PostDialogComponent, {
       width: '800px',
-      maxHeight: '90vh'
+      height: '90vh',
+      maxHeight: '800px'
     })
     dialogRef.afterClosed().subscribe( newPost => {
       if (newPost) {

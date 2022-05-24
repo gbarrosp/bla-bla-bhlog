@@ -14,6 +14,7 @@ CREATE TABLE "post" (
     title varchar(90),
     content text,
     created_at timestamp without time zone,
+    comments integer,
     "user_id" uuid
 );
 

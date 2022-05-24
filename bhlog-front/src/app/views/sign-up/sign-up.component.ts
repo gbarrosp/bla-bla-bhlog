@@ -36,27 +36,22 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp(){
-    if (this.signUpForm.valid && this.validatePassword()){
+    if (this.signUpForm.valid){
       let formData = this.signUpForm.getRawValue()
-      let user = new User()
-      user.name = formData.name
-      user.username = formData.username
-      user.password = formData.password
-      this.authService.signUp(user).subscribe(() => {
-        this.router.navigate([`/${HomeView.url}`])
-      })
+      if (formData.password != formData.passwordMatch){
+        this.messageService.showMessage(MessagesEnum.MISMATCH_PASSWORD)
+      } else {
+        let user = new User()
+        user.name = formData.name
+        user.username = formData.username
+        user.password = formData.password
+        this.authService.signUp(user).subscribe(() => {
+          this.router.navigate([`/${HomeView.url}`])
+        })
+      }
     } else {
       this.messageService.showMessage(MessagesEnum.INVALID_FORM)
     }
-  }
-
-  validatePassword(){
-    let formData = this.signUpForm.getRawValue()
-    if (formData.password != formData.passwordMatch){
-      this.messageService.showMessage(MessagesEnum.MISMATCH_PASSWORD)
-      return false
-    }
-    return true
   }
 
   navigateToLogin(){

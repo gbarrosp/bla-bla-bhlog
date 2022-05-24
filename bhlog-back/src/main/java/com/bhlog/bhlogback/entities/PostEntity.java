@@ -33,6 +33,9 @@ public class PostEntity extends UUIDEntity {
     @NotEmpty
 	private String content;
 
+	@Column(name = "comments")
+	private Integer commentsCounter;
+
     @Column(name = "created_at")
     private Timestamp createdAt;
 

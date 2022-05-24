@@ -33,6 +33,7 @@ export class ServerErrorInterceptor implements HttpInterceptor {
       }
     } else if (error.status === 401) {
       this.messageService.showMessage(MessagesEnum.ERROR_401)
+      this.authService.logOut()
     } else if (error.status === 403) {
       this.messageService.showMessage(MessagesEnum.ERROR_403)
     } else if (error.status === 500) {

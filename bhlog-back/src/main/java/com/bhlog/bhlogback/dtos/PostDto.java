@@ -16,5 +16,7 @@ public class PostDto {
 
     private UserDto user;
 
+	private Integer commentsCounter;
+
     private Timestamp createdAt;
 }
