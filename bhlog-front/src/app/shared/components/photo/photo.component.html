@@ -4,9 +4,8 @@
     <a (click)="openAlbum(photo.photoAlbum.id!)">{{photo.photoAlbum.title}}</a>
     <span>{{photo.createdAt | date:'dd/MM/YYYY'}}</span>
   </div>
-  <div fxLayout="column" fxLayoutAlign="start center">
-    {{photo.content}}
+  <div fxFill fxLayout="column" fxLayoutAlign="center center">
+    <img [src]="image"/>
   </div>
 </mat-card>
 
-<img [src]="image"/>

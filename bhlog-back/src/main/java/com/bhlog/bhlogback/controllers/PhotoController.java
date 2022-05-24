@@ -41,12 +41,6 @@ public class PhotoController {
 
 		try {
 			List<PhotoEntity> photos = photoService.getAllPhotos();
-			// List<PhotoDto> photosDtos = new ArrayList<PhotoDto>();
-			//  photos.stream().forEach(photo -> {
-			// 	PhotoDto photoDto = modelMapper.map(photo, PhotoDto.class);
-			// 	photoDto.setContent(Base64.getEncoder().encodeToString(photoDto.getContent().getBytes()));
-			// 	photosDtos.add(photoDto);
-			// });
 			response.setData(photos);
 			return ResponseEntity.ok(response);
 
@@ -61,7 +55,6 @@ public class PhotoController {
 
 		try {
 			PhotoEntity newPhoto = modelMapper.map(photo, PhotoEntity.class);
-			// newPhoto.setContent(Base64.getEncoder().encode(photo.getContent().getBytes()));
 			photoService.newPhoto(newPhoto);
 
 			response.setData(newPhoto);
