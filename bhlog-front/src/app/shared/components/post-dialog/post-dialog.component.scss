@@ -7,3 +7,7 @@
 mat-divider {
   margin: 20px 0;
 }
+
+::ng-deep .CodeMirror {
+  height: 300px;
+}
