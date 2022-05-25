@@ -14,8 +14,11 @@ import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.services.CommentService;
 import com.bhlog.bhlogback.services.PostService;
 import com.bhlog.bhlogback.services.UserService;
+import com.bhlog.bhlogback.util.ExceptionTreatment;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/bhlog/comments")
 public class CommentController {
+
+	private static final Logger log = LoggerFactory.getLogger(CommentController.class);
 
     @Autowired
     private UserService userService;
@@ -57,6 +62,7 @@ public class CommentController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("Get comments by post id error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
@@ -75,12 +81,13 @@ public class CommentController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("New comment error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Response<String>> deleteAlbum(@PathVariable("id") String commentId) {
+	public ResponseEntity<Response<String>> deleteComment(@PathVariable("id") String commentId) {
 		Response<String> response = new Response<String>();
 
 		try {
@@ -89,6 +96,7 @@ public class CommentController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("Delete comment error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}

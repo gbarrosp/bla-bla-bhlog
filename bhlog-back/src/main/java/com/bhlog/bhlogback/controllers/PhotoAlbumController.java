@@ -13,8 +13,11 @@ import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.services.PhotoAlbumService;
 import com.bhlog.bhlogback.services.UserService;
+import com.bhlog.bhlogback.util.ExceptionTreatment;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +35,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/bhlog/albums")
 public class PhotoAlbumController {
 
+	private static final Logger log = LoggerFactory.getLogger(PhotoAlbumController.class);
+
     @Autowired
     private UserService userService;
 
@@ -42,7 +47,7 @@ public class PhotoAlbumController {
 	private ModelMapper modelMapper;
 
     @GetMapping("/{username}")
-	public ResponseEntity<Response<List<PhotoAlbumDto>>> getAlbumsByUserId(@PathVariable("username") String username) {
+	public ResponseEntity<Response<List<PhotoAlbumDto>>> getAlbumsByUsername(@PathVariable("username") String username) {
 		Response<List<PhotoAlbumDto>> response = new Response<List<PhotoAlbumDto>>();
 
 		try {
@@ -54,6 +59,7 @@ public class PhotoAlbumController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("Get albums by username error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
@@ -73,6 +79,7 @@ public class PhotoAlbumController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("New photo album error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
@@ -87,6 +94,7 @@ public class PhotoAlbumController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("Delete album error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}

@@ -3,7 +3,6 @@ package com.bhlog.bhlogback.controllers;
 import javax.validation.Valid;
 
 import com.bhlog.bhlogback.dtos.LoginFormDTO;
-import com.bhlog.bhlogback.entities.PhotoAlbumEntity;
 import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.security.JwtProvider;
@@ -91,7 +90,7 @@ public class AuthAPIController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
-            response.setError(e.getMessage());
+            ExceptionTreatment.setExceptionMessage("Error while signin up. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}

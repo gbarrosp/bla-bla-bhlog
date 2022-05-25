@@ -11,8 +11,11 @@ import com.bhlog.bhlogback.dtos.PhotoDto;
 import com.bhlog.bhlogback.entities.PhotoEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.services.PhotoService;
+import com.bhlog.bhlogback.util.ExceptionTreatment;
 
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/bhlog/photos")
 public class PhotoController {
+
+	private static final Logger log = LoggerFactory.getLogger(PhotoController.class);
 
     @Autowired
     private PhotoService photoService;
@@ -47,6 +52,7 @@ public class PhotoController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("Get all photos error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
@@ -62,6 +68,7 @@ public class PhotoController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("Get photos by album id error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
@@ -78,12 +85,13 @@ public class PhotoController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("New photo error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Response<String>> deletePost(@PathVariable("id") String photoId) {
+	public ResponseEntity<Response<String>> deletePhoto(@PathVariable("id") String photoId) {
 		Response<String> response = new Response<String>();
 
 		try {
@@ -92,6 +100,7 @@ public class PhotoController {
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
+			ExceptionTreatment.setExceptionMessage("Delete photo error. ", e, response, log);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
 		}
 	}
