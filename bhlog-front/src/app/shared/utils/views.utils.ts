@@ -27,3 +27,8 @@ export const PhotoAlbumsView = {
   url: 'meus-albuns'
 }
 
+export const PostView = {
+  url: 'post',
+  urlData: 'post/:id'
+}
+

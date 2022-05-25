@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Post } from 'app/shared/models/post.model';
+import { PostView } from 'app/shared/utils/views.utils';
 
 @Component({
   selector: 'app-post',
@@ -11,7 +13,9 @@ export class PostComponent implements OnInit {
   @Input() post!: Post;
   maxLength: number = 500;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.post.content = this.post.content.length > this.maxLength ? this.resumeContent(this.post.content) : this.post.content
@@ -21,5 +25,9 @@ export class PostComponent implements OnInit {
     let half = content.slice(0, this.maxLength)
     let lastSpaceIndex = half.lastIndexOf(' ')
     return `${content.slice(0, lastSpaceIndex)} ...`
+  }
+
+  openPost(postId: string){
+    this.router.navigate([PostView.url, postId])
   }
 }

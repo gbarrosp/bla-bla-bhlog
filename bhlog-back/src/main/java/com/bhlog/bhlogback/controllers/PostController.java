@@ -2,6 +2,7 @@ package com.bhlog.bhlogback.controllers;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,20 @@ public class PostController {
 		try {
 			List<PostEntity> posts = postService.getAllPosts();
 			response.setData(posts);
+			return ResponseEntity.ok(response);
+
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+
+    @GetMapping(value = "/{id}")
+	public ResponseEntity<Response<PostEntity>> getPost(@PathVariable("id") String postId) {
+		Response<PostEntity> response = new Response<PostEntity>();
+
+		try {
+			Optional<PostEntity> post = postService.getPost(UUID.fromString(postId));
+			response.setData(post.get());
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {

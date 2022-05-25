@@ -23,7 +23,11 @@ export class PostService {
   }
 
   newPost(post: Post){
-    return this.http.post<Post>(`${environment.serverUrl}/bhlog/posts`, post)
+    return this.http.post<ResponseModel>(`${environment.serverUrl}/bhlog/posts`, post)
+  }
+
+  getPost(postId: string){
+    return this.http.get<ResponseModel>(`${environment.serverUrl}/bhlog/posts/${postId}`)
   }
 
   deletePost(){
