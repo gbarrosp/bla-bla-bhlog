@@ -10,6 +10,7 @@ import com.bhlog.bhlogback.entities.CommentEntity;
 import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.services.CommentService;
+import com.bhlog.bhlogback.services.PostService;
 import com.bhlog.bhlogback.services.UserService;
 
 import org.modelmapper.ModelMapper;
@@ -35,10 +36,13 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private PostService postService;
+
 	@Autowired
 	private ModelMapper modelMapper;
 
-    @GetMapping("/{id}")
+    @GetMapping("/post/{id}")
 	public ResponseEntity<Response<List<CommentEntity>>> getCommentsByPostId(@PathVariable("id") String postId) {
 		Response<List<CommentEntity>> response = new Response<List<CommentEntity>>();
 
@@ -60,11 +64,10 @@ public class CommentController {
 
 		try {
 			Optional<UserEntity> user = userService.findByUsername(comment.getUser().getUsername());
-			CommentEntity newComment = modelMapper.map(comment, CommentEntity.class);
-			newComment.setUser(user.get());
-			commentService.newComment(newComment);
-
-			response.setData(newComment);
+			comment.setUser(user.get());
+			commentService.newComment(comment);
+			postService.increseCommentsCounter(comment.getPost().getId());
+			response.setData(comment);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {

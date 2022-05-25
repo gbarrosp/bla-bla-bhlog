@@ -11,6 +11,7 @@ import { PostView } from 'app/shared/utils/views.utils';
 export class PostComponent implements OnInit {
 
   @Input() post!: Post;
+  @Input() isPostView: boolean = false;
   maxLength: number = 500;
 
   constructor(
@@ -18,7 +19,9 @@ export class PostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.post.content = this.post.content.length > this.maxLength ? this.resumeContent(this.post.content) : this.post.content
+    if (!this.isPostView) {
+      this.post.content = this.post.content.length > this.maxLength ? this.resumeContent(this.post.content) : this.post.content
+    }
   }
 
   resumeContent(content: string){

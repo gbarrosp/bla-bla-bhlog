@@ -13,5 +13,7 @@ public interface PostService {
 
     Optional<PostEntity> getPost(UUID postId);
 
+    void increseCommentsCounter(UUID postId);
+
     void deletePost(PostEntity post);
 }

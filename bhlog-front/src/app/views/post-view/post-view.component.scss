@@ -1,0 +1,18 @@
+.panel {
+  background-color: #fff;
+  width: 100%;
+}
+
+.comment-section {
+  width: 832px;
+}
+
+mat-form-field {
+  width: 100%;
+  height: 100%;
+}
+
+:host ::ng-deep .mat-form-field-wrapper{
+  margin: 0 !important;
+  padding: 0;
+}

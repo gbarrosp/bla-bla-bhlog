@@ -1,10 +1,10 @@
 import { Post } from "./post.model";
 import { User } from "./user.model";
 
-export interface Comment {
-  id: string;
-  post: Post;
-  user: User;
-  content: string;
-  createdAt: string;
+export class Comment {
+  id?: string;
+  post: Post = new Post();
+  user: User = new User();
+  content!: string;
+  createdAt!: string;
 }

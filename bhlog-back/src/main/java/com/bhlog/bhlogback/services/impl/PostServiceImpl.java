@@ -36,4 +36,11 @@ public class PostServiceImpl implements PostService {
     public void deletePost(PostEntity post) {
         postRepository.delete(post);
     }
+
+    @Override
+    public void increseCommentsCounter(UUID postId) {
+        Optional<PostEntity> post = postRepository.findById(postId);
+        post.get().setCommentsCounter(post.get().getCommentsCounter() + 1);
+        postRepository.save(post.get());
+    }
 }
