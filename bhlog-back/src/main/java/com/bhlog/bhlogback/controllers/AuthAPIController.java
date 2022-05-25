@@ -53,7 +53,7 @@ public class AuthAPIController {
     @Autowired
     JwtProvider jwtProvider;
 
-    @Value("${mercy.app.jwtExpiration}")
+    @Value("${bhlog.app.jwtExpiration}")
     private int jwtExpiration;
     
     @PostMapping("/login")
