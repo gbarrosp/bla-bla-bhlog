@@ -5,7 +5,6 @@ import { AuthGuard } from './shared/services/auth/auth.guard';
 import { HomeView, LoginView, PhotoAlbumsView, PhotoAlbumView, PhotosView, PostsView, SignUpView } from './shared/utils/views.utils';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
-import { PhotoAlbumComponent } from './views/photo-album/photo-album.component';
 import { PhotoAlbumsComponent } from './views/photo-albums/photo-albums.component';
 import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';

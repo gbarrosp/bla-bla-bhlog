@@ -76,6 +76,7 @@ export class PhotoDialogComponent implements OnInit {
       this.photo.title = this.photoForm.get('title')?.value
       this.photo.description = this.photoForm.get('description')?.value
       this.photo.photoAlbum.id = this.photoForm.get('album')?.value
+      this.photo.photoAlbum.title = this.albums.find(album => album.id === this.photo.photoAlbum.id)?.title!
       this.photo.createdAt = new Date().toISOString()
       this.savePhoto(this.photo)
     } else {

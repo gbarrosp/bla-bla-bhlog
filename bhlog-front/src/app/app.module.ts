@@ -34,7 +34,6 @@ import { RequestInterceptor } from './shared/interceptors/request.interceptor';
 import { ServerErrorInterceptor } from './shared/interceptors/server-error.interceptor';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
-import { PhotoAlbumComponent } from './views/photo-album/photo-album.component';
 import { PhotoAlbumsComponent } from './views/photo-albums/photo-albums.component';
 import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';
@@ -54,7 +53,6 @@ import { SignUpComponent } from './views/sign-up/sign-up.component';
     PhotoComponent,
     PhotosGridComponent,
     PhotoAlbumsComponent,
-    PhotoAlbumComponent,
     HeaderComponent,
     PhotoDialogComponent,
     AlbumDialogComponent,
