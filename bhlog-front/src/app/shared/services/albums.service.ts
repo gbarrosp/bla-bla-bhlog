@@ -26,10 +26,7 @@ export class AlbumsService {
     return this.http.post<PhotoAlbum>(`${environment.serverUrl}/bhlog/albums`, album)
   }
 
-  editAlbum(album: PhotoAlbum): PhotoAlbum {
-    return album
-  }
-
-  deleteAlbum(albumId: string): void {
+  deleteAlbum(albumId: string): Observable<ResponseModel> {
+    return this.http.delete<ResponseModel>(`${environment.serverUrl}/bhlog/albums/${albumId}`)
   }
 }

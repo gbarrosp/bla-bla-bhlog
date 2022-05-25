@@ -33,8 +33,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void deletePost(PostEntity post) {
-        postRepository.delete(post);
+    public void delete(UUID postId) {
+        postRepository.deleteById(postId);
     }
 
     @Override

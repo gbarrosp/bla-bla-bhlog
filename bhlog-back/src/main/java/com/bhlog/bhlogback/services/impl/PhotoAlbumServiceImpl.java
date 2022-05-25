@@ -33,12 +33,12 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumService {
     }
 
     @Override
-    public PhotoAlbumEntity addAlbum(PhotoAlbumEntity post) {
-        return photoAlbumRepository.save(post);
+    public PhotoAlbumEntity addAlbum(PhotoAlbumEntity album) {
+        return photoAlbumRepository.save(album);
     }
 
     @Override
-    public void delete(PhotoAlbumEntity post) {
-        photoAlbumRepository.delete(post);
+    public void delete(UUID albumId) {
+        photoAlbumRepository.deleteById(albumId);
     }
 }

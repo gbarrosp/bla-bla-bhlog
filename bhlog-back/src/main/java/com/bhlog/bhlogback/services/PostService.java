@@ -15,5 +15,5 @@ public interface PostService {
 
     void increseCommentsCounter(UUID postId);
 
-    void deletePost(PostEntity post);
+    void delete(UUID postId);
 }

@@ -1,10 +1,10 @@
-<div *ngIf="!posts.length; else postsBlock " class="fill" fxLayout="column" fxLayoutAlign="center center">
+<div *ngIf="!posts.length && postsLoaded; else postsBlock " class="fill" fxLayout="column" fxLayoutAlign="center center">
   <span>Ainda não tem nenhum post por aqui...</span>
 </div>
 <ng-template #postsBlock>
   <div fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center center">
     <div *ngFor="let post of posts">
-      <app-post [post]="post"></app-post>
+      <app-post [post]="post" (deletedId)="removePost($event)"></app-post>
     </div>
   </div>
 </ng-template>

@@ -14,5 +14,5 @@ public interface PhotoAlbumService {
 
     PhotoAlbumEntity newAlbum(UserEntity user);
 
-    void delete(PhotoAlbumEntity album);
+    void delete(UUID albumId);
 }

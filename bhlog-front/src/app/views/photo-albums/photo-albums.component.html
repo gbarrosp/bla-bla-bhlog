@@ -1,17 +1,24 @@
-<div *ngIf="!albums.length; else albumsBlock " class="fill" fxLayout="column" fxLayoutAlign="center center">
+<div *ngIf="!albums.length && albumsLoaded; else albumsBlock " class="fill" fxLayout="column" fxLayoutAlign="center center">
   <span>Você ainda não criou nenhum álbum :(</span>
 </div>
 <ng-template #albumsBlock>
   <div [style.maxWidth.px]="1500" [ngStyle]="{'margin': 'auto'}">
     <mat-grid-list cols="5" rowHeight="250px">
       <mat-grid-tile *ngFor="let album of albums">
-        <mat-card (click)="openAlbum(album.id!)">
-          <div fxFill fxLayout="column" fxLayoutAlign="start start">
-            <div fxFill fxFlex="50" fxLayout="row" fxLayoutAlign="center">
-              <mat-icon>perm_media</mat-icon>
+        <mat-card>
+          <div fxFill fxLayout="column" fxLayoutAlign="space-between">
+            <div fxFlex class="clickable-panel" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start center" (click)="openAlbum(album.id!)">
+              <div class="icon" fxFlex="50" fxLayout="row" fxLayoutAlign="center">
+                <mat-icon>perm_media</mat-icon>
+              </div>
+              <span fxFlex="25" class="title">{{album.title}}</span>
+              <span fxFlex="25" class="description">{{album.description}}</span>
             </div>
-            <span fxFlex="25" class="title">{{album.title}}</span>
-            <span fxFlex="25" class="description">{{album.description}}</span>
+            <div fxLayout="row" fxLayoutAlign="end">
+              <button mat-icon-button class="delete" (click)="deleteAlbum(album.id!)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
         </mat-card>
       </mat-grid-tile>

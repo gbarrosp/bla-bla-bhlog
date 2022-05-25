@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Comment } from 'app/shared/models/comment.model';
 import { Post } from 'app/shared/models/post.model';
 import { AuthService } from 'app/shared/services/auth/auth.service';
 import { CommentService } from 'app/shared/services/comment.service';
 import { PostService } from 'app/shared/services/post.service';
+import { PostsView } from 'app/shared/utils/views.utils';
 import { lastValueFrom } from 'rxjs';
 
 @Component({
@@ -15,11 +16,13 @@ export class PostViewComponent implements OnInit {
 
   postId!: string;
   post!: Post;
+  username!: string;
   commentText: string = ''
   comments: Comment[] = []
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private postService: PostService,
     private commentService: CommentService,
     private authService: AuthService
@@ -27,6 +30,7 @@ export class PostViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.postId = this.route.snapshot.paramMap.get('id')!
+    this.username = this.authService.getUsername()
     this.getPost()
     this.getComments()
   }
@@ -43,7 +47,7 @@ export class PostViewComponent implements OnInit {
 
   async addComment() {
     let comment = new Comment()
-    comment.user.username = this.authService.getUsername()
+    comment.user.username = this.username
     comment.content = this.commentText
     comment.createdAt = new Date().toISOString()
     comment.post.id = this.postId
@@ -53,6 +57,15 @@ export class PostViewComponent implements OnInit {
     this.clear()
   }
 
+  async deleteComment(commentId: string) {
+    const deletedComment = await lastValueFrom(this.commentService.deleteComment(commentId))
+    let removedIndex = this.comments.indexOf(deletedComment.data)
+    this.comments.splice(removedIndex, 1)
+  }
+
+  navigateToPosts(){
+    this.router.navigate([PostsView.url])
+  }
 
   clear(){
     this.commentText = ''

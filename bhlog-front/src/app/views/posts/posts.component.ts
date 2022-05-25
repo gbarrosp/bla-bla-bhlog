@@ -12,6 +12,7 @@ import { lastValueFrom } from 'rxjs';
 export class PostsComponent implements OnInit {
 
   posts: Post[] = []
+  postsLoaded: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -25,6 +26,7 @@ export class PostsComponent implements OnInit {
   async getAllPosts(){
     const posts = await lastValueFrom(this.postService.getAllPosts())
     this.posts = posts
+    this.postsLoaded = true
   }
 
   addPost(){
@@ -38,5 +40,10 @@ export class PostsComponent implements OnInit {
         this.getAllPosts()
       }
     })
+  }
+
+  removePost(postId: string){
+    let removedIndex = this.posts.indexOf(this.posts.find(post => post.id === postId)!)
+    this.posts.splice(removedIndex, 1)
   }
 }

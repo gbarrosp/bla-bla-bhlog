@@ -1,6 +1,11 @@
 <mat-card class="post">
-  <mat-card-title (click)="openPost(post.id!)">
-    <span class="title">{{post.title}}</span>
+  <mat-card-title>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <span (click)="openPost(post.id!)" class="title">{{post.title}}</span>
+      <button *ngIf="username === post.user.username" mat-icon-button class="delete" (click)="deletePost(post.id!)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
   </mat-card-title>
   <div fxLayout="row" fxLayoutAlign="space-between">
     <span>{{post.user.username}}</span>

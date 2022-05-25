@@ -3,6 +3,7 @@ package com.bhlog.bhlogback.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,12 +42,13 @@ public class PostController {
     private ModelMapper modelMapper;
 
     @GetMapping
-	public ResponseEntity<Response<List<PostEntity>>> getAllPosts() {
-		Response<List<PostEntity>> response = new Response<List<PostEntity>>();
+	public ResponseEntity<Response<List<PostDto>>> getAllPosts() {
+		Response<List<PostDto>> response = new Response<List<PostDto>>();
 
 		try {
 			List<PostEntity> posts = postService.getAllPosts();
-			response.setData(posts);
+			List<PostDto> albumsDtos = posts.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
+			response.setData(albumsDtos);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -54,12 +57,13 @@ public class PostController {
 	}
 
     @GetMapping(value = "/{id}")
-	public ResponseEntity<Response<PostEntity>> getPost(@PathVariable("id") String postId) {
-		Response<PostEntity> response = new Response<PostEntity>();
+	public ResponseEntity<Response<PostDto>> getPost(@PathVariable("id") String postId) {
+		Response<PostDto> response = new Response<PostDto>();
 
 		try {
 			Optional<PostEntity> post = postService.getPost(UUID.fromString(postId));
-			response.setData(post.get());
+			PostDto postDto = modelMapper.map(post.get(), PostDto.class);
+			response.setData(postDto);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -68,15 +72,30 @@ public class PostController {
 	}
 
     @PostMapping
-	public ResponseEntity<Response<PostEntity>> newPost(@RequestBody @Valid PostDto post) {
-		Response<PostEntity> response = new Response<PostEntity>();
+	public ResponseEntity<Response<PostDto>> newPost(@RequestBody @Valid PostDto post) {
+		Response<PostDto> response = new Response<PostDto>();
 
 		try {
 			Optional<UserEntity> user = userService.findByUsername(post.getUser().getUsername());
 			PostEntity newPost = modelMapper.map(post, PostEntity.class);
 			newPost.setUser(user.get());
 			postService.newPost(newPost);
-			response.setData(newPost);
+			post.setId(newPost.getId());
+			response.setData(post);
+			return ResponseEntity.ok(response);
+
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Response<String>> deletePost(@PathVariable("id") String postId) {
+		Response<String> response = new Response<String>();
+
+		try {
+			postService.delete(UUID.fromString(postId));
+			response.setData(postId);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {

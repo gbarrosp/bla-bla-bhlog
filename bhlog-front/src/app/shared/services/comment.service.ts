@@ -25,4 +25,8 @@ export class CommentService {
         return resp
       }));
   }
+
+  deleteComment(commentId: string): Observable<ResponseModel> {
+    return this.http.delete<ResponseModel>(`${environment.serverUrl}/bhlog/comments/${commentId}`)
+  }
 }

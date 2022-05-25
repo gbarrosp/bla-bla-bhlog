@@ -3,9 +3,11 @@ package com.bhlog.bhlogback.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.bhlog.bhlogback.dtos.CommentDto;
 import com.bhlog.bhlogback.entities.CommentEntity;
 import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
@@ -18,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,14 +46,14 @@ public class CommentController {
 	private ModelMapper modelMapper;
 
     @GetMapping("/post/{id}")
-	public ResponseEntity<Response<List<CommentEntity>>> getCommentsByPostId(@PathVariable("id") String postId) {
-		Response<List<CommentEntity>> response = new Response<List<CommentEntity>>();
+	public ResponseEntity<Response<List<CommentDto>>> getCommentsByPostId(@PathVariable("id") String postId) {
+		Response<List<CommentDto>> response = new Response<List<CommentDto>>();
 
 		try {
 			Optional<List<CommentEntity>> comments = commentService.getCommentsByPostId(UUID.fromString(postId));
-			// List<CommentEntity> albumsDtos = albums.get().stream().map(album -> modelMapper.map(album, CommentEntity.class)).collect(Collectors.toList());
+			List<CommentDto> commentsDtos = comments.get().stream().map(comment -> modelMapper.map(comment, CommentDto.class)).collect(Collectors.toList());
 
-			response.setData(comments.get());
+			response.setData(commentsDtos);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -59,15 +62,16 @@ public class CommentController {
 	}
 
     @PostMapping
-	public ResponseEntity<Response<CommentEntity>> newComment(@RequestBody @Valid CommentEntity comment) {
-		Response<CommentEntity> response = new Response<CommentEntity>();
+	public ResponseEntity<Response<CommentDto>> newComment(@RequestBody @Valid CommentEntity comment) {
+		Response<CommentDto> response = new Response<CommentDto>();
 
 		try {
 			Optional<UserEntity> user = userService.findByUsername(comment.getUser().getUsername());
 			comment.setUser(user.get());
 			commentService.newComment(comment);
 			postService.increseCommentsCounter(comment.getPost().getId());
-			response.setData(comment);
+			CommentDto newComment = modelMapper.map(comment, CommentDto.class);
+			response.setData(newComment);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -75,18 +79,17 @@ public class CommentController {
 		}
 	}
 
-    // @DeleteMapping(value = "/delete")
-	// public ResponseEntity<Response<CommentEntity>> deleteAlbum(@RequestBody @Valid CommentEntity album) {
-	// 	Response<CommentEntity> response = new Response<CommentEntity>();
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Response<String>> deleteAlbum(@PathVariable("id") String commentId) {
+		Response<String> response = new Response<String>();
 
-	// 	try {
-	// 		albumService.deleteAlbum(album);
+		try {
+			commentService.delete(UUID.fromString(commentId));
+			response.setData(commentId);
+			return ResponseEntity.ok(response);
 
-	// 		response.setData(album);
-	// 		return ResponseEntity.ok(response);
-
-	// 	} catch (Exception e) {
-	// 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-	// 	}
-	// }
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
 }

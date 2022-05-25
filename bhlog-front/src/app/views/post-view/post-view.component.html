@@ -1,10 +1,15 @@
 <div fxLayout="column" fxLayoutGap="42px" fxLayoutAlign="start center">
-  <app-post *ngIf="post" [isPostView]="true" [post]="post"></app-post>
+  <app-post *ngIf="post" (deletedId)="navigateToPosts()" [isPostView]="true" [post]="post"></app-post>
   <div class="comment-section" fxLayout="column" fxLayoutGap="25px" fxLayoutAlign="start center">
     <div *ngFor="let comment of comments" class="panel" fxLayout="column" fxLayoutGap="15px">
       <div fxLayout="row" fxLayoutAlign="space-between">
         <span>{{comment.user.username}}</span>
-        <span>{{comment.createdAt | date:'dd/MM/YYYY'}}</span>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <span>{{comment.createdAt | date:'dd/MM/YYYY'}}</span>
+          <button *ngIf="username === comment.user.username" mat-icon-button class="delete" (click)="deleteComment(comment.id!)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
       </div>
       <span>
         {{comment.content}}

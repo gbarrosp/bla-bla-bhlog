@@ -15,6 +15,7 @@ import { lastValueFrom } from 'rxjs';
 export class PhotoAlbumsComponent implements OnInit {
 
   albums: PhotoAlbum[] = [];
+  albumsLoaded: boolean = false;
 
   constructor(
     private router: Router,
@@ -30,6 +31,7 @@ export class PhotoAlbumsComponent implements OnInit {
   async getUserAlbums(){
     const albums = await lastValueFrom(this.albumsService.getUserAlbums(this.authService.getUsername()))
     this.albums = albums
+    this.albumsLoaded = true
   }
 
   openAlbum(albumId: string){
@@ -43,5 +45,11 @@ export class PhotoAlbumsComponent implements OnInit {
     dialogRed.afterClosed().subscribe(() => {
       this.getUserAlbums()
     })
+  }
+
+  async deleteAlbum(albumId: string){
+    const deletedAlbum = await lastValueFrom(this.albumsService.deleteAlbum(albumId))
+    let removedIndex = this.albums.indexOf(deletedAlbum.data)
+    this.albums.splice(removedIndex, 1)
   }
 }

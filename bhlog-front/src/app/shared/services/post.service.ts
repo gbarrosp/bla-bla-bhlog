@@ -30,7 +30,7 @@ export class PostService {
     return this.http.get<ResponseModel>(`${environment.serverUrl}/bhlog/posts/${postId}`)
   }
 
-  deletePost(){
-
+  deletePost(postId: string){
+    return this.http.delete<ResponseModel>(`${environment.serverUrl}/bhlog/posts/${postId}`)
   }
 }

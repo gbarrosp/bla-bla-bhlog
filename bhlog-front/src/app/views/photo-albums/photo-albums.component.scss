@@ -1,12 +1,26 @@
 mat-card {
   width: 170px;
   height: 150px;
+}
+
+.clickable-panel {
   cursor: pointer;
+}
+
+.icon {
   mat-icon {
     font-size: 65px;
     width: 65px;
     height: 65px;
   }
+}
+
+.delete {
+  color: #000;
+  background-color: #fff;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 

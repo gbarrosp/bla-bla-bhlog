@@ -12,5 +12,5 @@ public interface CommentService {
 
     CommentEntity newComment(CommentEntity comment);
 
-    void deleteComment(CommentEntity comment);
+    void delete(UUID commentId);
 }
