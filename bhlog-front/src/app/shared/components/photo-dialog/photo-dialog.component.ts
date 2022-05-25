@@ -22,6 +22,7 @@ export class PhotoDialogComponent implements OnInit {
   file?: File;
   albums!: PhotoAlbum[];
   photo: Photo = new Photo();
+  showLoader: boolean = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -84,6 +85,7 @@ export class PhotoDialogComponent implements OnInit {
 
   async savePhoto(photo: Photo) {
     try {
+      this.showLoader = true
       await lastValueFrom(this.photoService.newPhoto(photo))
       this.dialogRef.close(true)
     } catch (e) {
