@@ -2,6 +2,10 @@ mat-grid-tile {
   padding: 0
 }
 
+.spinner {
+  height: 70vh;
+}
+
 ::ng-deep .mat-grid-tile-content {
   align-items: start !important;
 }

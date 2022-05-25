@@ -22,16 +22,16 @@ export class PhotosService {
       }));
   }
 
-  getAlbumPhotos(albumId: string): Photo[]{
-    return []
-  }
+  getAlbumPhotos(albumId: string): Observable<Photo[]>{
+    return this.http.get<ResponseModel>(`${environment.serverUrl}/bhlog/photos/album/${albumId}`).pipe(
+      map((response: ResponseModel) => {
+        const resp: Photo[] = response.data;
+        return resp
+      }));
+    }
 
   newPhoto(photo: Photo){
     return this.http.post<Photo>(`${environment.serverUrl}/bhlog/photos`, photo)
-  }
-
-  editPhoto(){
-
   }
 
   deletePhoto(){

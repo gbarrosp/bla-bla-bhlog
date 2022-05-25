@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MessagesEnum } from 'app/shared/enums/messages.enum';
 import { PhotoAlbum } from 'app/shared/models/photo-album.model';
 import { Photo } from 'app/shared/models/photo.model';
@@ -24,6 +24,7 @@ export class PhotoDialogComponent implements OnInit {
   photo: Photo = new Photo();
 
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<PhotoDialogComponent>,
     private messageService: MessageService,
@@ -43,6 +44,11 @@ export class PhotoDialogComponent implements OnInit {
       description: [null],
       album: [null, Validators.required],
     });
+    if (this.data) {
+      this.photoForm.patchValue({
+        album: this.data.albumId
+      })
+    }
   }
 
   async getUserAlbums(){
@@ -79,13 +85,13 @@ export class PhotoDialogComponent implements OnInit {
   async savePhoto(photo: Photo) {
     try {
       await lastValueFrom(this.photoService.newPhoto(photo))
-      this.close()
+      this.dialogRef.close(true)
     } catch (e) {
       this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)
     }
   }
 
   close(){
-    this.dialogRef.close()
+    this.dialogRef.close(false)
   }
 }

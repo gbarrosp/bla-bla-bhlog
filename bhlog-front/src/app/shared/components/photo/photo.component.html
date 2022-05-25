@@ -1,5 +1,5 @@
-<mat-card class="photo">
-  <mat-card-title>{{photo.title}}</mat-card-title>
+<div class="photo panel">
+  <span>{{photo.title}}</span>
   <div fxLayout="row" fxLayoutAlign="space-between">
     <a (click)="openAlbum(photo.photoAlbum.id!)">{{photo.photoAlbum.title}}</a>
     <span>{{photo.createdAt | date:'dd/MM/YYYY'}}</span>
@@ -7,5 +7,5 @@
   <div fxFill fxLayout="column" fxLayoutAlign="center center">
     <img [src]="image"/>
   </div>
-</mat-card>
+</div>
 

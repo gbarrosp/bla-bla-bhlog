@@ -1,6 +1,8 @@
 package com.bhlog.bhlogback.controllers;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -15,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +41,20 @@ public class PhotoController {
 		try {
 			List<PhotoEntity> photos = photoService.getAllPhotos();
 			response.setData(photos);
+			return ResponseEntity.ok(response);
+
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
+	}
+
+    @GetMapping(value = "/album/{id}")
+	public ResponseEntity<Response<List<PhotoEntity>>> getAlbumPhotos(@PathVariable("id") String albumId) {
+		Response<List<PhotoEntity>> response = new Response<List<PhotoEntity>>();
+
+		try {
+			Optional<List<PhotoEntity>> photos = photoService.getAlbumPhotos(UUID.fromString(albumId));
+			response.setData(photos.get());
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {

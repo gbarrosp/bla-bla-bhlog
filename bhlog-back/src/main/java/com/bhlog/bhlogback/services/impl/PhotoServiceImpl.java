@@ -1,6 +1,8 @@
 package com.bhlog.bhlogback.services.impl;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import com.bhlog.bhlogback.entities.PhotoEntity;
 import com.bhlog.bhlogback.repositories.PhotoRepository;
@@ -18,6 +20,11 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public List<PhotoEntity> getAllPhotos() {
         return photoRepository.findAll();
+    }
+
+    @Override
+    public Optional<List<PhotoEntity>> getAlbumPhotos(UUID albumId) {
+        return photoRepository.findByPhotoAlbumId(albumId);
     }
 
     @Override

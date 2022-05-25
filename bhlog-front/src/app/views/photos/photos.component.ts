@@ -12,6 +12,7 @@ import { lastValueFrom } from 'rxjs';
 export class PhotosComponent implements OnInit {
 
   photos!: Photo[]
+  photosLoaded: boolean = false;
 
   constructor(
     private photosService: PhotosService,
@@ -23,13 +24,20 @@ export class PhotosComponent implements OnInit {
   }
 
   async getAllPhotos(){
+    this.photosLoaded = false
     const photos = await lastValueFrom(this.photosService.getAllPhotos())
     this.photos = photos
+    this.photosLoaded = true
   }
 
   addPhoto(){
-    this.dialog.open(PhotoDialogComponent, {
+    let dialogRef = this.dialog.open(PhotoDialogComponent, {
       width: '400px'
+    })
+    dialogRef.afterClosed().subscribe(newPhoto => {
+      if (newPhoto) {
+        this.getAllPhotos()
+      }
     })
   }
 }

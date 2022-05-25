@@ -8,7 +8,8 @@ import { Photo } from 'app/shared/models/photo.model';
 })
 export class PhotosGridComponent implements OnInit {
 
-  @Input() photos!: Photo[]
+  @Input() photos!: Photo[];
+  @Input() photosLoaded!: boolean;
 
   constructor() { }
 

@@ -3,9 +3,11 @@ package com.bhlog.bhlogback.controllers;
 import javax.validation.Valid;
 
 import com.bhlog.bhlogback.dtos.LoginFormDTO;
+import com.bhlog.bhlogback.entities.PhotoAlbumEntity;
 import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.security.JwtProvider;
+import com.bhlog.bhlogback.services.PhotoAlbumService;
 import com.bhlog.bhlogback.services.UserService;
 import com.bhlog.bhlogback.util.ExceptionTreatment;
 
@@ -42,6 +44,9 @@ public class AuthAPIController {
  
     @Autowired
     private UserService userService;
+ 
+    @Autowired
+    private PhotoAlbumService photoAlbumService;
    
     @Autowired
     PasswordEncoder encoder;
@@ -80,6 +85,13 @@ public class AuthAPIController {
             String decodedPassword = user.getPassword();
 			user.setPassword(encoder.encode(user.getPassword()));
 			userService.saveUser(user);
+
+            PhotoAlbumEntity album = new PhotoAlbumEntity();
+            album.setTitle("Meu primeiro álbum");
+            album.setDescription("Memórias incríveis!");
+            album.setUser(user);
+            photoAlbumService.newAlbum(album);
+
             response.setData(getAuthToken(user.getUsername(), decodedPassword));
 			return ResponseEntity.ok(response);
 

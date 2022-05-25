@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,18 +11,23 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkdownModule } from 'ngx-markdown';
+import { SimplemdeModule } from 'ngx-simplemde';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AlbumDialogComponent } from './shared/components/album-dialog/album-dialog.component';
 import { BaseLayoutComponent } from './shared/components/base-layout/base-layout.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { PhotoDialogComponent } from './shared/components/photo-dialog/photo-dialog.component';
 import { PhotoComponent } from './shared/components/photo/photo.component';
 import { PhotosGridComponent } from './shared/components/photos-grid/photos-grid.component';
+import { PostDialogComponent } from './shared/components/post-dialog/post-dialog.component';
 import { PostComponent } from './shared/components/post/post.component';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { RequestInterceptor } from './shared/interceptors/request.interceptor';
@@ -34,11 +39,6 @@ import { PhotoAlbumsComponent } from './views/photo-albums/photo-albums.componen
 import { PhotosComponent } from './views/photos/photos.component';
 import { PostsComponent } from './views/posts/posts.component';
 import { SignUpComponent } from './views/sign-up/sign-up.component';
-import { AlbumDialogComponent } from './shared/components/album-dialog/album-dialog.component';
-import { PostDialogComponent } from './shared/components/post-dialog/post-dialog.component';
-import { SimplemdeModule } from 'ngx-simplemde';
-import { MarkdownModule } from 'ngx-markdown';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -68,6 +68,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDividerModule,
     MatFormFieldModule,
     FormsModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
