@@ -5,11 +5,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.bhlog.bhlogback.entities.PhotoAlbumEntity;
+import com.bhlog.bhlogback.entities.UserEntity;
 
 public interface PhotoAlbumService {
     Optional<List<PhotoAlbumEntity>> getAlbumsByUserId(UUID userId);
 
-    PhotoAlbumEntity newAlbum(PhotoAlbumEntity album);
+    PhotoAlbumEntity addAlbum(PhotoAlbumEntity album);
+
+    PhotoAlbumEntity newAlbum(UserEntity user);
 
     void delete(PhotoAlbumEntity album);
 }

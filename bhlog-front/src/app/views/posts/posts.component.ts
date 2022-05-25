@@ -11,7 +11,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class PostsComponent implements OnInit {
 
-  posts!: Post[]
+  posts: Post[] = []
 
   constructor(
     private postService: PostService,
@@ -24,7 +24,6 @@ export class PostsComponent implements OnInit {
 
   async getAllPosts(){
     const posts = await lastValueFrom(this.postService.getAllPosts())
-    console.log(posts)
     this.posts = posts
   }
 

@@ -14,7 +14,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class PhotoAlbumsComponent implements OnInit {
 
-  albums!: PhotoAlbum[]
+  albums: PhotoAlbum[] = [];
 
   constructor(
     private router: Router,

@@ -64,7 +64,7 @@ public class PhotoAlbumController {
 			Optional<UserEntity> user = userService.findByUsername(album.getUser().getUsername());
 			PhotoAlbumEntity newAlbum = modelMapper.map(album, PhotoAlbumEntity.class);
 			newAlbum.setUser(user.get());
-			photoAlbumService.newAlbum(newAlbum);
+			photoAlbumService.addAlbum(newAlbum);
 
 			response.setData(newAlbum);
 			return ResponseEntity.ok(response);

@@ -1,8 +1,13 @@
-<div fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center center">
-  <div *ngFor="let post of posts">
-    <app-post [post]="post"></app-post>
-  </div>
+<div *ngIf="!posts.length; else postsBlock " class="fill" fxLayout="column" fxLayoutAlign="center center">
+  <span>Ainda não tem nenhum post por aqui...</span>
 </div>
+<ng-template #postsBlock>
+  <div fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center center">
+    <div *ngFor="let post of posts">
+      <app-post [post]="post"></app-post>
+    </div>
+  </div>
+</ng-template>
 <button mat-fab class="fab-button" (click)="addPost()">
   <mat-icon>post_add</mat-icon>
 </button>

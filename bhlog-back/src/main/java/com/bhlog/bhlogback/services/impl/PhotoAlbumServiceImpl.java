@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.bhlog.bhlogback.entities.PhotoAlbumEntity;
+import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.repositories.PhotoAlbumRepository;
 import com.bhlog.bhlogback.services.PhotoAlbumService;
 
@@ -23,7 +24,16 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumService {
     }
 
     @Override
-    public PhotoAlbumEntity newAlbum(PhotoAlbumEntity post) {
+    public PhotoAlbumEntity newAlbum(UserEntity user) {
+        PhotoAlbumEntity album = new PhotoAlbumEntity();
+        album.setTitle("Meu primeiro álbum");
+        album.setDescription("Memórias incríveis!");
+        album.setUser(user);
+        return photoAlbumRepository.save(album);
+    }
+
+    @Override
+    public PhotoAlbumEntity addAlbum(PhotoAlbumEntity post) {
         return photoAlbumRepository.save(post);
     }
 

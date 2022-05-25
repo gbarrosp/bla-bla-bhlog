@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/shared/services/auth/auth.service';
 import { PhotosView, PostsView } from 'app/shared/utils/views.utils';
 
 @Component({
@@ -8,11 +9,15 @@ import { PhotosView, PostsView } from 'app/shared/utils/views.utils';
 })
 export class HomeComponent implements OnInit {
 
+  username!: string;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.username = this.authService.getUsername()
   }
 
   navigateToPosts(){

@@ -59,7 +59,7 @@ public class CommentController {
 	}
 
     @PostMapping
-	public ResponseEntity<Response<CommentEntity>> newAlbum(@RequestBody @Valid CommentEntity comment) {
+	public ResponseEntity<Response<CommentEntity>> newComment(@RequestBody @Valid CommentEntity comment) {
 		Response<CommentEntity> response = new Response<CommentEntity>();
 
 		try {

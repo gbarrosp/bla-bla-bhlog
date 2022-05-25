@@ -1,10 +1,17 @@
-<div class="home-container" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
-  <div class="panel" fxLayout="column" fxLayoutGap="20px">
-    <img src="assets/images/posts-icon.png" (click)="navigateToPosts()">
-    <button mat-raised-button type="submit" class="pink-button" (click)="navigateToPosts()" fxFlex>VER POSTS</button>
+<div class="home-container" fxLayout="column" fxLayoutGap="30px">
+  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <span class="title">
+      Olá, {{username}}!
+    </span>
   </div>
-  <div class="panel" fxLayout="column" fxLayoutGap="20px">
-    <img src="assets/images/photos-icon.png" (click)="navigateToPhotos()">
-    <button mat-raised-button type="submit" class="pink-button" (click)="navigateToPhotos()" fxFlex>VER FOTOS</button>
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="50px">
+    <div class="panel" fxLayout="column" fxLayoutGap="20px">
+      <img src="assets/images/posts-icon.png" (click)="navigateToPosts()">
+      <button mat-raised-button type="submit" class="pink-button" (click)="navigateToPosts()" fxFlex>VER POSTS</button>
+    </div>
+    <div class="panel" fxLayout="column" fxLayoutGap="20px">
+      <img src="assets/images/photos-icon.png" (click)="navigateToPhotos()">
+      <button mat-raised-button type="submit" class="pink-button" (click)="navigateToPhotos()" fxFlex>VER FOTOS</button>
+    </div>
   </div>
 </div>

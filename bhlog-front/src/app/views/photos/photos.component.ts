@@ -12,7 +12,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class PhotosComponent implements OnInit {
 
-  photos!: Photo[]
+  photos: Photo[] = [];
   albumId?: string;
   photosLoaded: boolean = false;
 

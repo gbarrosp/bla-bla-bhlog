@@ -1,4 +1,9 @@
-<app-photos-grid [photos]="photos" [photosLoaded]="photosLoaded"></app-photos-grid>
+<div *ngIf="!photos.length && photosLoaded; else photosBlock " class="fill" fxLayout="column" fxLayoutAlign="center center">
+  <span>Ainda não tem nenhuma foto por aqui...</span>
+</div>
+<ng-template #photosBlock>
+  <app-photos-grid [photos]="photos" [photosLoaded]="photosLoaded"></app-photos-grid>
+</ng-template>
 
 <button mat-fab class="fab-button" (click)="addPhoto()">
   <mat-icon>add_a_photo</mat-icon>
