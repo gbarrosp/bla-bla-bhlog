@@ -3,9 +3,9 @@
 </div>
 <ng-template #photoGrid>
   <div [style.maxWidth.px]="1500" [ngStyle]="{'margin': 'auto'}">
-    <mat-grid-list cols="3" rowHeight="470px">
+    <mat-grid-list cols="3" rowHeight="500px">
       <mat-grid-tile *ngFor="let photo of photos">
-        <app-photo [photo]="photo"></app-photo>
+        <app-photo [photo]="photo" (deletedId)="removePhoto($event)"></app-photo>
       </mat-grid-tile>
     </mat-grid-list>
   </div>

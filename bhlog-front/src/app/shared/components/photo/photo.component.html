@@ -1,5 +1,10 @@
 <div class="photo panel">
-  <span>{{photo.title}}</span>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <span>{{photo.title}}</span>
+    <button *ngIf="username === photo.photoAlbum.user.username" mat-icon-button class="delete" (click)="deletePhoto(photo.id!)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
   <div fxLayout="row" fxLayoutAlign="space-between">
     <a (click)="openAlbum(photo.photoAlbum.id!)">{{photo.photoAlbum.title}}</a>
     <span>{{photo.createdAt | date:'dd/MM/YYYY'}}</span>

@@ -11,7 +11,7 @@ public interface PhotoService {
 
     Optional<List<PhotoEntity>> getAlbumPhotos(UUID albumId);
 
-    PhotoEntity newPhoto(PhotoEntity post);
+    PhotoEntity newPhoto(PhotoEntity photo);
 
-    void delete(PhotoEntity post);
+    void delete(UUID photoId);
 }

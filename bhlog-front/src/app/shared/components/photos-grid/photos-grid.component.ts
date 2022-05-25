@@ -16,4 +16,8 @@ export class PhotosGridComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  async removePhoto(photoId: string) {
+    let removedIndex = this.photos.indexOf(this.photos.find(photo => photo.id === photoId)!)
+    this.photos.splice(removedIndex, 1)
+  }
 }
