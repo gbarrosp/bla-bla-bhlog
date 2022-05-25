@@ -31,7 +31,7 @@ export class PhotosService {
     }
 
   newPhoto(photo: Photo){
-    return this.http.post<Photo>(`${environment.serverUrl}/bhlog/photos`, photo)
+    return this.http.post<ResponseModel>(`${environment.serverUrl}/bhlog/photos`, photo)
   }
 
   deletePhoto(){

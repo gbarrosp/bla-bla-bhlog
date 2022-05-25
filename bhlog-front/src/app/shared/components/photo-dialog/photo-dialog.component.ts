@@ -86,8 +86,8 @@ export class PhotoDialogComponent implements OnInit {
   async savePhoto(photo: Photo) {
     try {
       this.showLoader = true
-      await lastValueFrom(this.photoService.newPhoto(photo))
-      this.dialogRef.close(true)
+      const newPhoto = await lastValueFrom(this.photoService.newPhoto(photo))
+      this.dialogRef.close(newPhoto.data)
     } catch (e) {
       this.messageService.showMessage(MessagesEnum.INTERNAL_SERVER_ERROR)
     }

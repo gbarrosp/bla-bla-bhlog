@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: HomeView.url, component: HomeComponent },
       { path: PostsView.url, component: PostsComponent },
       { path: PhotosView.url, component: PhotosComponent },
-      { path: PhotoAlbumView.urlData, component: PhotoAlbumComponent },
+      { path: PhotoAlbumView.urlData, component: PhotosComponent },
       { path: PhotoAlbumsView.url, component: PhotoAlbumsComponent },
     ]
   }
