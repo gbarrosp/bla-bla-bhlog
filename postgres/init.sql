@@ -1,0 +1,2 @@
+CREATE DATABASE "bhlog-db";
+GRANT ALL PRIVILEGES ON DATABASE "bhlog-db" TO master;
