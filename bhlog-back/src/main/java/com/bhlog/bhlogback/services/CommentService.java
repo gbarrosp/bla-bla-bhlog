@@ -1,16 +1,17 @@
 package com.bhlog.bhlogback.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+import com.bhlog.bhlogback.dtos.CommentDto;
 import com.bhlog.bhlogback.entities.CommentEntity;
+import com.bhlog.bhlogback.entities.UserEntity;
 
 public interface CommentService {
 
-    Optional<List<CommentEntity>> getCommentsByPostId(UUID postId);
+    List<CommentDto> getCommentsByPostId(UUID postId);
 
-    CommentEntity newComment(CommentEntity comment);
+    CommentDto newComment(CommentEntity comment, UserEntity user);
 
     void delete(UUID commentId);
 }

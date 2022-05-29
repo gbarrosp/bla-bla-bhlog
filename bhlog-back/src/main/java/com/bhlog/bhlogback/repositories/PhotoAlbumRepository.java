@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PhotoAlbumRepository extends JpaRepository<PhotoAlbumEntity, UUID> {
-    Optional<List<PhotoAlbumEntity>> findByUserId(UUID userId);
+    Optional<List<PhotoAlbumEntity>> findAllByUserId(UUID userId);
 }

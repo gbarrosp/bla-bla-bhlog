@@ -3,19 +3,16 @@ package com.bhlog.bhlogback.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import com.bhlog.bhlogback.dtos.PhotoAlbumDto;
-import com.bhlog.bhlogback.entities.PhotoAlbumEntity;
 import com.bhlog.bhlogback.entities.UserEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.services.PhotoAlbumService;
 import com.bhlog.bhlogback.services.UserService;
 import com.bhlog.bhlogback.util.ExceptionTreatment;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,18 +40,13 @@ public class PhotoAlbumController {
     @Autowired
     private PhotoAlbumService photoAlbumService;
 
-	@Autowired
-	private ModelMapper modelMapper;
-
     @GetMapping("/{username}")
 	public ResponseEntity<Response<List<PhotoAlbumDto>>> getAlbumsByUsername(@PathVariable("username") String username) {
 		Response<List<PhotoAlbumDto>> response = new Response<List<PhotoAlbumDto>>();
 
 		try {
 			Optional<UserEntity> user = userService.findByUsername(username);
-			Optional<List<PhotoAlbumEntity>> albums = photoAlbumService.getAlbumsByUserId(user.get().getId());
-			List<PhotoAlbumDto> albumsDtos = albums.get().stream().map(album -> modelMapper.map(album, PhotoAlbumDto.class)).collect(Collectors.toList());
-
+			List<PhotoAlbumDto> albumsDtos = photoAlbumService.getAlbumsByUserId(user.get().getId());
 			response.setData(albumsDtos);
 			return ResponseEntity.ok(response);
 
@@ -70,12 +62,8 @@ public class PhotoAlbumController {
 
 		try {
 			Optional<UserEntity> user = userService.findByUsername(album.getUser().getUsername());
-			PhotoAlbumEntity newAlbum = modelMapper.map(album, PhotoAlbumEntity.class);
-			newAlbum.setUser(user.get());
-			photoAlbumService.addAlbum(newAlbum);
-
-			album.setId(newAlbum.getId());
-			response.setData(album);
+			PhotoAlbumDto newAlbum = photoAlbumService.addAlbum(album, user.get());
+			response.setData(newAlbum);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {

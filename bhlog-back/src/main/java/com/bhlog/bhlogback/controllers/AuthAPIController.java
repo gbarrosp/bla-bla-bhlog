@@ -84,7 +84,7 @@ public class AuthAPIController {
             String decodedPassword = user.getPassword();
 			user.setPassword(encoder.encode(user.getPassword()));
 			userService.saveUser(user);
-            photoAlbumService.newAlbum(user);
+            photoAlbumService.createFirstAlbum(user);
 
             response.setData(getAuthToken(user.getUsername(), decodedPassword));
 			return ResponseEntity.ok(response);
