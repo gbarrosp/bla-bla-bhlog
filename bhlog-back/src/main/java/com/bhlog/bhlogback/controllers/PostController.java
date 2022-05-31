@@ -3,7 +3,6 @@ package com.bhlog.bhlogback.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -15,7 +14,6 @@ import com.bhlog.bhlogback.services.PostService;
 import com.bhlog.bhlogback.services.UserService;
 import com.bhlog.bhlogback.util.ExceptionTreatment;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

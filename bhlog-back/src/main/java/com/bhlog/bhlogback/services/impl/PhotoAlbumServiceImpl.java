@@ -27,7 +27,7 @@ public class PhotoAlbumServiceImpl implements PhotoAlbumService {
     @Override
     public List<PhotoAlbumDto> getAlbumsByUserId(UUID userId) {
         Optional<List<PhotoAlbumEntity>> albums = photoAlbumRepository.findAllByUserId(userId);
-        List<PhotoAlbumDto> albumsDtos = albums.stream().map(album -> modelMapper.map(album, PhotoAlbumDto.class)).collect(Collectors.toList());
+        List<PhotoAlbumDto> albumsDtos = albums.get().stream().map(album -> modelMapper.map(album, PhotoAlbumDto.class)).collect(Collectors.toList());
         return albumsDtos;
     }
 

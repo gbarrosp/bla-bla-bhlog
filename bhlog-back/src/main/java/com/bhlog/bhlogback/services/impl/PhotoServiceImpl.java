@@ -31,7 +31,7 @@ public class PhotoServiceImpl implements PhotoService {
     @Override
     public List<PhotoDto> getAlbumPhotos(UUID albumId) {
         Optional<List<PhotoEntity>> photos = photoRepository.findByPhotoAlbumId(albumId);
-        List<PhotoDto> photosDtos = photos.stream().map(photo -> modelMapper.map(photo, PhotoDto.class)).collect(Collectors.toList());
+        List<PhotoDto> photosDtos = photos.get().stream().map(photo -> modelMapper.map(photo, PhotoDto.class)).collect(Collectors.toList());
         return photosDtos;
     }
 

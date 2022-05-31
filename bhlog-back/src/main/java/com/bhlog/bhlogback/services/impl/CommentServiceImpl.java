@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<CommentDto> getCommentsByPostId(UUID postId) {
         Optional<List<CommentEntity>> comments = commentRepository.findByPostId(postId);
-        List<CommentDto> commentsDtos = comments.stream().map(comment -> modelMapper.map(comment, CommentDto.class)).collect(Collectors.toList());
+        List<CommentDto> commentsDtos = comments.get().stream().map(comment -> modelMapper.map(comment, CommentDto.class)).collect(Collectors.toList());
         return commentsDtos;
     }
 
