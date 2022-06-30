@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "cypress:open": "cypress open"
+    },
+    "devDependencies": {
+        "cypress-cucumber-preprocessor": "^4.3.1"
+    }
+}
