@@ -1,6 +1,10 @@
-import { Then, When } from "cypress-cucumber-preprocessor/steps";
-import LoginPage from "../viewActions/loginView";
+import { Given, When, Then } from "cypress-cucumber-preprocessor/steps"
+import LoginPage from "../../viewActions/loginView";
 const loginPage = new LoginPage;
+
+Given('que eu não esteja logado', () => {
+  loginPage.clearStorage()
+})
 
 When('acesso a página de login do sistema', () => {
   loginPage.goToLoginPage()

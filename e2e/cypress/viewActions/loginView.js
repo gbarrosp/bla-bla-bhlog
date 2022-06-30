@@ -5,8 +5,12 @@ const loginElements = new LoginElements
 
 class LoginPage {
 
+  clearStorage() {
+    cy.clearLocalStorage()
+  }
+  
   goToLoginPage() {
-    cy.visit('/login')
+    cy.visit('')
   }
 
   buttonClick() {
