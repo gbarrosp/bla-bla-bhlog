@@ -15,4 +15,4 @@ FROM openjdk:8-jre-alpine
 COPY --from=build /usr/src/app/target/bhlog-back-*.jar /usr/app/bhlog-back.jar
 EXPOSE 80
 
-ENTRYPOINT ["java","-Dspring.profiles.active=$SPRING_PROFILES_ACTIVE","-jar","/usr/app/bhlog-back.jar"]
+ENTRYPOINT ["java","-Dspring.config.use-legacy-processing=true","-Dspring.profiles.active=docker","-jar","/usr/app/bhlog-back.jar"]
