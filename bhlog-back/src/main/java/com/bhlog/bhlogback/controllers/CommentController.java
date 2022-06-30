@@ -3,7 +3,6 @@ package com.bhlog.bhlogback.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -16,7 +15,6 @@ import com.bhlog.bhlogback.services.PostService;
 import com.bhlog.bhlogback.services.UserService;
 import com.bhlog.bhlogback.util.ExceptionTreatment;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,17 +45,12 @@ public class CommentController {
     @Autowired
     private PostService postService;
 
-	@Autowired
-	private ModelMapper modelMapper;
-
     @GetMapping("/post/{id}")
 	public ResponseEntity<Response<List<CommentDto>>> getCommentsByPostId(@PathVariable("id") String postId) {
 		Response<List<CommentDto>> response = new Response<List<CommentDto>>();
 
 		try {
-			Optional<List<CommentEntity>> comments = commentService.getCommentsByPostId(UUID.fromString(postId));
-			List<CommentDto> commentsDtos = comments.get().stream().map(comment -> modelMapper.map(comment, CommentDto.class)).collect(Collectors.toList());
-
+			List<CommentDto> commentsDtos = commentService.getCommentsByPostId(UUID.fromString(postId));
 			response.setData(commentsDtos);
 			return ResponseEntity.ok(response);
 
@@ -73,10 +66,8 @@ public class CommentController {
 
 		try {
 			Optional<UserEntity> user = userService.findByUsername(comment.getUser().getUsername());
-			comment.setUser(user.get());
-			commentService.newComment(comment);
+			CommentDto newComment = commentService.newComment(comment, user.get());
 			postService.increseCommentsCounter(comment.getPost().getId());
-			CommentDto newComment = modelMapper.map(comment, CommentDto.class);
 			response.setData(newComment);
 			return ResponseEntity.ok(response);
 

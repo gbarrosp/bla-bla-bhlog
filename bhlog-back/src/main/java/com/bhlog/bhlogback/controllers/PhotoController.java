@@ -1,19 +1,15 @@
 package com.bhlog.bhlogback.controllers;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import com.bhlog.bhlogback.dtos.PhotoDto;
-import com.bhlog.bhlogback.entities.PhotoEntity;
 import com.bhlog.bhlogback.response.Response;
 import com.bhlog.bhlogback.services.PhotoService;
 import com.bhlog.bhlogback.util.ExceptionTreatment;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,17 +34,13 @@ public class PhotoController {
     @Autowired
     private PhotoService photoService;
 	
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping
 	public ResponseEntity<Response<List<PhotoDto>>> getAllPhotos() {
 		Response<List<PhotoDto>> response = new Response<List<PhotoDto>>();
 
 		try {
-			List<PhotoEntity> photos = photoService.getAllPhotos();
-			List<PhotoDto> photosDtos = photos.stream().map(photo -> modelMapper.map(photo, PhotoDto.class)).collect(Collectors.toList());
-			response.setData(photosDtos);
+			List<PhotoDto> photos = photoService.getAllPhotos();
+			response.setData(photos);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -62,9 +54,8 @@ public class PhotoController {
 		Response<List<PhotoDto>> response = new Response<List<PhotoDto>>();
 
 		try {
-			Optional<List<PhotoEntity>> photos = photoService.getAlbumPhotos(UUID.fromString(albumId));
-			List<PhotoDto> photosDtos = photos.get().stream().map(photo -> modelMapper.map(photo, PhotoDto.class)).collect(Collectors.toList());
-			response.setData(photosDtos);
+			List<PhotoDto> photos = photoService.getAlbumPhotos(UUID.fromString(albumId));
+			response.setData(photos);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -78,10 +69,8 @@ public class PhotoController {
 		Response<PhotoDto> response = new Response<PhotoDto>();
 
 		try {
-			PhotoEntity newPhoto = modelMapper.map(photo, PhotoEntity.class);
-			photoService.newPhoto(newPhoto);
-			photo.setId(newPhoto.getId());
-			response.setData(photo);
+			PhotoDto newPhoto = photoService.newPhoto(photo);
+			response.setData(newPhoto);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {

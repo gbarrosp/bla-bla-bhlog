@@ -1,17 +1,18 @@
 package com.bhlog.bhlogback.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+import com.bhlog.bhlogback.dtos.PostDto;
 import com.bhlog.bhlogback.entities.PostEntity;
+import com.bhlog.bhlogback.entities.UserEntity;
 
 public interface PostService {
-    List<PostEntity> getAllPosts();
+    List<PostDto> getAllPosts();
 
-    PostEntity newPost(PostEntity post);
+    PostDto newPost(PostEntity post, UserEntity user);
 
-    Optional<PostEntity> getPost(UUID postId);
+    PostDto getPost(UUID postId);
 
     void increseCommentsCounter(UUID postId);
 

@@ -1,18 +1,18 @@
 package com.bhlog.bhlogback.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+import com.bhlog.bhlogback.dtos.PhotoAlbumDto;
 import com.bhlog.bhlogback.entities.PhotoAlbumEntity;
 import com.bhlog.bhlogback.entities.UserEntity;
 
 public interface PhotoAlbumService {
-    Optional<List<PhotoAlbumEntity>> getAlbumsByUserId(UUID userId);
+    List<PhotoAlbumDto> getAlbumsByUserId(UUID userId);
 
-    PhotoAlbumEntity addAlbum(PhotoAlbumEntity album);
+    PhotoAlbumDto addAlbum(PhotoAlbumDto album, UserEntity user);
 
-    PhotoAlbumEntity newAlbum(UserEntity user);
+    PhotoAlbumEntity createFirstAlbum(UserEntity user);
 
     void delete(UUID albumId);
 }

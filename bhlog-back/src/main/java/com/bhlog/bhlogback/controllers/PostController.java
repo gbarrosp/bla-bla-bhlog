@@ -3,7 +3,6 @@ package com.bhlog.bhlogback.controllers;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -15,7 +14,6 @@ import com.bhlog.bhlogback.services.PostService;
 import com.bhlog.bhlogback.services.UserService;
 import com.bhlog.bhlogback.util.ExceptionTreatment;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,17 +41,13 @@ public class PostController {
     @Autowired
     private UserService userService;
 	
-    @Autowired
-    private ModelMapper modelMapper;
-
     @GetMapping
 	public ResponseEntity<Response<List<PostDto>>> getAllPosts() {
 		Response<List<PostDto>> response = new Response<List<PostDto>>();
 
 		try {
-			List<PostEntity> posts = postService.getAllPosts();
-			List<PostDto> albumsDtos = posts.stream().map(post -> modelMapper.map(post, PostDto.class)).collect(Collectors.toList());
-			response.setData(albumsDtos);
+			List<PostDto> posts = postService.getAllPosts();
+			response.setData(posts);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {
@@ -67,8 +61,7 @@ public class PostController {
 		Response<PostDto> response = new Response<PostDto>();
 
 		try {
-			Optional<PostEntity> post = postService.getPost(UUID.fromString(postId));
-			PostDto postDto = modelMapper.map(post.get(), PostDto.class);
+			PostDto postDto = postService.getPost(UUID.fromString(postId));
 			response.setData(postDto);
 			return ResponseEntity.ok(response);
 
@@ -79,16 +72,13 @@ public class PostController {
 	}
 
     @PostMapping
-	public ResponseEntity<Response<PostDto>> newPost(@RequestBody @Valid PostDto post) {
+	public ResponseEntity<Response<PostDto>> newPost(@RequestBody @Valid PostEntity post) {
 		Response<PostDto> response = new Response<PostDto>();
 
 		try {
 			Optional<UserEntity> user = userService.findByUsername(post.getUser().getUsername());
-			PostEntity newPost = modelMapper.map(post, PostEntity.class);
-			newPost.setUser(user.get());
-			postService.newPost(newPost);
-			post.setId(newPost.getId());
-			response.setData(post);
+			PostDto newPost = postService.newPost(post, user.get());
+			response.setData(newPost);
 			return ResponseEntity.ok(response);
 
 		} catch (Exception e) {

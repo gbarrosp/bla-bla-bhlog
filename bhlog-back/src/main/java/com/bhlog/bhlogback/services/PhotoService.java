@@ -1,17 +1,16 @@
 package com.bhlog.bhlogback.services;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
-import com.bhlog.bhlogback.entities.PhotoEntity;
+import com.bhlog.bhlogback.dtos.PhotoDto;
 
 public interface PhotoService {
-    List<PhotoEntity> getAllPhotos();
+    List<PhotoDto> getAllPhotos();
 
-    Optional<List<PhotoEntity>> getAlbumPhotos(UUID albumId);
+    List<PhotoDto> getAlbumPhotos(UUID albumId);
 
-    PhotoEntity newPhoto(PhotoEntity photo);
+    PhotoDto newPhoto(PhotoDto photo);
 
     void delete(UUID photoId);
 }

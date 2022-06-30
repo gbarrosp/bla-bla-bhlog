@@ -1,0 +1,42 @@
+version: '3.6'
+
+services:
+
+  frontend:
+    build:
+      context: ./bhlog-front
+      dockerfile: Dockerfile
+    container_name: bhlog-front
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    expose:
+      - 80
+
+  backend:
+    build:
+      context: ./bhlog-back
+      dockerfile: Dockerfile
+    container_name: bhlog-back
+    depends_on:
+      - postgres-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "81:80"
+    expose:
+      - 81
+
+  postgres-db:
+    container_name: bhlog-db
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
