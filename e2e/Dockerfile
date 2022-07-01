@@ -1,4 +1,4 @@
-FROM cypress/base:14
+FROM cypress/included:10.3.0
 WORKDIR /app
 
 # dependencies will be installed only if the package files change
@@ -14,4 +14,5 @@ RUN npm ci
 # running this command separately from "cypress run" will also cache its result
 # to avoid verifying again when running the tests
 RUN npx cypress verify
-RUN npx cypress run
+
+ENTRYPOINT [ "npx cypress run" ]
