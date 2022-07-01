@@ -48,3 +48,5 @@ services:
     container_name: bhlog-e2e
     depends_on:
       - frontend
+    command: "npx cypress run"
+    network_mode: "host"
