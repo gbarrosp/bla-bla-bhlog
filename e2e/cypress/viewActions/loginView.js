@@ -10,7 +10,7 @@ class LoginPage {
   }
   
   goToLoginPage() {
-    cy.visit('')
+    cy.visit('/login')
   }
 
   buttonClick() {
