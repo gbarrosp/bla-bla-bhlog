@@ -41,10 +41,10 @@ services:
     ports:
       - "5432:5432"
 
-  e2e:
-    build:
-      context: ./e2e
-      dockerfile: Dockerfile
-    container_name: bhlog-e2e
-    depends_on:
-      - frontend
+  # e2e:
+  #   build:
+  #     context: ./e2e
+  #     dockerfile: Dockerfile
+  #   container_name: bhlog-e2e
+  #   depends_on:
+  #     - frontend

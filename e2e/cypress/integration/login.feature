@@ -8,7 +8,7 @@ Funcionalidade: Login no sistema
 Cenário de Fundo:
   Dado que eu não esteja logado
 
-Cenário: Login com formulário
+Cenário: Login com formulário vazio
   Quando acesso a página de login do sistema
   Então vejo os campos do formulário vazios
   Quando clico em entrar
